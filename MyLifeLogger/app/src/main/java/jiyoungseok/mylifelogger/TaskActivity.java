@@ -30,6 +30,14 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
 
+        buttonMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getApplicationContext(),MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
         buttonGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
