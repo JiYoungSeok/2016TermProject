@@ -14,7 +14,6 @@ import android.widget.Toast;
 public class TaskActivity extends AppCompatActivity {
 
     Button buttonLog, buttonMap, buttonGoal, buttonStart, buttonStop, buttonReset;
-    Button buttonStart1, buttonStart2, buttonStart3, buttonStart4, buttonStart5, buttonStart6, buttonStart7, buttonStart8, buttonStart9;
     TextView textViewTodayDate;
 
     private long lastTimeBackPressed;
@@ -83,6 +82,39 @@ public class TaskActivity extends AppCompatActivity {
                 chronometer.setBase(SystemClock.elapsedRealtime());
             }
         });
+    }
+
+    public void onClickStart(View view) {
+        TextView textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
+        switch(view.getId()) {
+            case R.id.startStudy:
+                textViewWhatToDo.setText("Study");
+                break;
+            case R.id.startWork:
+                textViewWhatToDo.setText("Work");
+                break;
+            case R.id.startHobby:
+                textViewWhatToDo.setText("Hobby");
+                break;
+            case R.id.startWorkout:
+                textViewWhatToDo.setText("Workout");
+                break;
+            case R.id.startSleep:
+                textViewWhatToDo.setText("Sleep");
+                break;
+            case R.id.startDate:
+                textViewWhatToDo.setText("Date");
+                break;
+            case R.id.startEat:
+                textViewWhatToDo.setText("Eat");
+                break;
+            case R.id.startMove:
+                textViewWhatToDo.setText("Move");
+                break;
+            case R.id.startOther:
+                textViewWhatToDo.setText("Other");
+                break;
+        }
     }
 
     public void onBackPressed() {

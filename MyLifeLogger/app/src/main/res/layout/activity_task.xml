@@ -101,6 +101,7 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="Study"
+                android:id="@+id/textView_WhatToDo"
                 android:gravity="center"/>
 
             <!--<TextView-->
@@ -188,7 +189,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start1"/>
+                android:id="@+id/startStudy"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -220,7 +222,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start2"/>
+                android:id="@+id/startWork"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -252,7 +255,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start3"/>
+                android:id="@+id/startHobby"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -284,7 +288,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start4"/>
+                android:id="@+id/startWorkout"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -316,7 +321,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start5"/>
+                android:id="@+id/startSleep"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -348,7 +354,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start6"/>
+                android:id="@+id/startDate"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -380,7 +387,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start7"/>
+                android:id="@+id/startEat"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -412,7 +420,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start8"/>
+                android:id="@+id/startMove"
+                android:onClick="onClickStart"/>
         </LinearLayout>
 
         <LinearLayout
@@ -444,7 +453,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="Start"
-                android:id="@+id/button_Start9"/>
+                android:id="@+id/startOther"
+                android:onClick="onClickStart"/>
         </LinearLayout>
     </LinearLayout>
 
