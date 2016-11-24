@@ -17,6 +17,7 @@ public class TaskActivity extends AppCompatActivity {
     TextView textViewTodayDate;
 
     private long lastTimeBackPressed;
+    private long timeWhenStopped = 0;
 
     Today today = new Today();
 
@@ -64,6 +65,7 @@ public class TaskActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                 chronometer.start();
             }
         });
@@ -72,6 +74,7 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chronometer.stop();
+                timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
             }
         });
 
@@ -80,6 +83,7 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chronometer.setBase(SystemClock.elapsedRealtime());
+                timeWhenStopped = 0;
             }
         });
     }
