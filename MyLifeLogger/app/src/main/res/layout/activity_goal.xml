@@ -90,6 +90,22 @@
                 android:textSize="50sp"
                 android:text="나의 목표 달성 결과"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:text="목표설정"
+                android:gravity="center"
+                android:id="@+id/button_MakeGoal"
+                android:background="#56B37F"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
