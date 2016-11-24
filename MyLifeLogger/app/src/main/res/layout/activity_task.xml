@@ -108,7 +108,7 @@
                 android:layout_height="65dp"
                 android:textStyle="bold"
                 android:textSize="30sp"
-                android:textColor="#0000FF"
+                android:textColor="#FFFFFF"
                 android:text="▶" />
 
             <Button
@@ -120,12 +120,12 @@
                 android:text="■" />
 
             <Button
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="65dp"
                 android:textStyle="bold"
                 android:textSize="30sp"
                 android:textColor="#800080"
-                android:text="⊙"/>
+                android:text="●"/>
         </LinearLayout>
 
 
