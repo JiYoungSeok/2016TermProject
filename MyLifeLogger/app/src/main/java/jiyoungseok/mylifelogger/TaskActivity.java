@@ -81,31 +81,25 @@ public class TaskActivity extends AppCompatActivity {
         TextView textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         switch(view.getId()) {
             case R.id.startStudy:
-                textViewWhatToDo.setText("Study");
+                textViewWhatToDo.setText("공부");
                 break;
             case R.id.startWork:
-                textViewWhatToDo.setText("Work");
+                textViewWhatToDo.setText("직장");
                 break;
             case R.id.startHobby:
-                textViewWhatToDo.setText("Hobby");
+                textViewWhatToDo.setText("취미");
                 break;
             case R.id.startWorkout:
-                textViewWhatToDo.setText("Workout");
-                break;
-            case R.id.startSleep:
-                textViewWhatToDo.setText("Sleep");
+                textViewWhatToDo.setText("운동");
                 break;
             case R.id.startDate:
-                textViewWhatToDo.setText("Date");
-                break;
-            case R.id.startEat:
-                textViewWhatToDo.setText("Eat");
+                textViewWhatToDo.setText("데이트");
                 break;
             case R.id.startMove:
-                textViewWhatToDo.setText("Move");
+                textViewWhatToDo.setText("이동");
                 break;
             case R.id.startOther:
-                textViewWhatToDo.setText("Other");
+                textViewWhatToDo.setText("기타");
                 break;
         }
     }
