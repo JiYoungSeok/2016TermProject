@@ -17,42 +17,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private GoogleMap mMap;
 
-    Button buttonTask, buttonLog, buttonGoal;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        buttonTask = (Button) findViewById(R.id.button_Task);
-        buttonLog = (Button) findViewById(R.id.button_Log);
-        buttonGoal = (Button) findViewById(R.id.button_Goal);
-
-        buttonTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), TaskActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), LogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonGoal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), GoalActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -63,5 +33,26 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.addMarker(new MarkerOptions().position(seoul).title("Seoul"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(seoul));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+    }
+
+    public void onClickChangePage(View view) {
+        switch(view.getId()) {
+            case R.id.button_Task:
+                Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
+                startActivity(moveToTask);
+                break;
+            case R.id.button_Log:
+                Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
+                startActivity(moveToLog);
+                break;
+            case R.id.button_Map:
+                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
+                startActivity(moveToMap);
+                break;
+            case R.id.button_Goal:
+                Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
+                startActivity(moveToGoal);
+                break;
+        }
     }
 }

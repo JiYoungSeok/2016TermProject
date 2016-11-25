@@ -1,19 +1,20 @@
 package jiyoungseok.mylifelogger;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TaskActivity extends AppCompatActivity {
 
-    Button buttonLog, buttonMap, buttonGoal, buttonStart, buttonStop, buttonReset;
+    Button buttonStart, buttonStop, buttonReset;
     TextView textViewTodayDate;
 
     private long lastTimeBackPressed;
@@ -26,9 +27,6 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        buttonLog = (Button) findViewById(R.id.button_Log);
-        buttonMap = (Button) findViewById(R.id.button_Map);
-        buttonGoal = (Button) findViewById(R.id.button_Goal);
         buttonStart = (Button) findViewById(R.id.button_Start);
         buttonStop = (Button) findViewById(R.id.button_Stop);
         buttonReset = (Button) findViewById(R.id.button_Reset);
@@ -37,30 +35,6 @@ public class TaskActivity extends AppCompatActivity {
         textViewTodayDate.setText(today.getYear() + "년 " + today.getMonth() + "월 " + today.getDay() + "일");
 
         final Chronometer chronometer = (Chronometer) findViewById(R.id.chronometer);
-
-        buttonLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), LogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(),MapActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonGoal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), GoalActivity.class);
-                startActivity(intent);
-            }
-        });
 
         buttonStart.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -78,7 +52,6 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
 
-
         buttonReset.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +59,22 @@ public class TaskActivity extends AppCompatActivity {
                 timeWhenStopped = 0;
             }
         });
+    }
+
+    public void onClickCalendar(View view) {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                monthOfYear = monthOfYear + 1;
+                textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
+                textViewTodayDate.setText(year + "년 " + monthOfYear + "월 " + dayOfMonth + "일");
+
+                today.setYear(year);
+                today.setMonth(monthOfYear - 1);
+                today.setDay(dayOfMonth);
+            }
+        };
+        new DatePickerDialog(TaskActivity.this, dateSetListener, today.getYear(), today.getMonth(), today.getDay()).show();
     }
 
     public void onClickStart(View view) {
@@ -117,6 +106,27 @@ public class TaskActivity extends AppCompatActivity {
                 break;
             case R.id.startOther:
                 textViewWhatToDo.setText("Other");
+                break;
+        }
+    }
+
+    public void onClickChangePage(View view) {
+        switch(view.getId()) {
+            case R.id.button_Task:
+                Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
+                startActivity(moveToTask);
+                break;
+            case R.id.button_Log:
+                Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
+                startActivity(moveToLog);
+                break;
+            case R.id.button_Map:
+                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
+                startActivity(moveToMap);
+                break;
+            case R.id.button_Goal:
+                Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
+                startActivity(moveToGoal);
                 break;
         }
     }

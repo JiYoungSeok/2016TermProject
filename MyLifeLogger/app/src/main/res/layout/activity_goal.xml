@@ -24,7 +24,8 @@
             android:textStyle="bold"
             android:text="Task"
             android:id="@+id/button_Task"
-            android:background="#56B37F"/>
+            android:background="#56B37F"
+            android:onClick="onClickChangePage"/>
 
         <Button
             android:layout_width="match_parent"
@@ -34,7 +35,8 @@
             android:textStyle="bold"
             android:text="Log"
             android:id="@+id/button_Log"
-            android:background="#56B37F"/>
+            android:background="#56B37F"
+            android:onClick="onClickChangePage"/>
 
         <Button
             android:layout_width="match_parent"
@@ -44,7 +46,8 @@
             android:textStyle="bold"
             android:text="Map"
             android:id="@+id/button_Map"
-            android:background="#56B37F"/>
+            android:background="#56B37F"
+            android:onClick="onClickChangePage"/>
 
         <Button
             android:layout_width="match_parent"
@@ -54,7 +57,8 @@
             android:textStyle="bold"
             android:text="Goal"
             android:id="@+id/button_Goal"
-            android:background="#82F9B7"/>
+            android:background="#82F9B7"
+            android:onClick="onClickChangePage"/>
     </LinearLayout>
 
     <LinearLayout

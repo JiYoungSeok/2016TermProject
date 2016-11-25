@@ -8,39 +8,30 @@ import android.widget.Button;
 
 public class GoalActivity extends AppCompatActivity {
 
-    Button buttonTask, buttonLog, buttonMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
+    }
 
-        buttonTask = (Button) findViewById(R.id.button_Task);
-        buttonLog = (Button) findViewById(R.id.button_Log);
-        buttonMap = (Button) findViewById(R.id.button_Map);
-
-        buttonTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), TaskActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(), LogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        buttonMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(),MapActivity.class);
-                startActivity(intent);
-            }
-        });
+    public void onClickChangePage(View view) {
+        switch(view.getId()) {
+            case R.id.button_Task:
+                Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
+                startActivity(moveToTask);
+                break;
+            case R.id.button_Log:
+                Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
+                startActivity(moveToLog);
+                break;
+            case R.id.button_Map:
+                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
+                startActivity(moveToMap);
+                break;
+            case R.id.button_Goal:
+                Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
+                startActivity(moveToGoal);
+                break;
+        }
     }
 }
