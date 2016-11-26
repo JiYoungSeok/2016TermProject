@@ -12,16 +12,26 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class TaskActivity extends AppCompatActivity {
 
     Button buttonStart, buttonStop, buttonReset, buttonSave;
-    TextView textViewTodayDate, textViewStudy;
+    TextView textViewTodayDate, textViewWhatToDo;
+    TextView textViewStudy, textViewWork, textViewHobby, textViewWorkout, textViewDate, textViewMove, textViewOther;
     Chronometer chronometer;
 
+    final TaskDBManager dbManager = new TaskDBManager(this, "task.db", null, 1);
+    final int SECONDS_PER_MINUTE = 60;
+    final int SECONDS_PER_HOUR = 3600;
+    final int YEAR_TO_CONVERTDATE = 10000;
+    final int MONTH_TO_CONVERTDATE = 100;
+
+    private int currentTime;
+    private int currentTimeToSeconds;
+    private int convertDate;
+    private int switchWhatToDo;
     private long lastTimeBackPressed;
     private long timeWhenStopped = 0;
-    private long currentTime;
-    private int convertTime;
     private boolean isTimerRun = false;
 
     Today today = new Today();
@@ -31,14 +41,17 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
+        setText();
+
         buttonStart = (Button) findViewById(R.id.button_Start);
         buttonStop = (Button) findViewById(R.id.button_Stop);
         buttonReset = (Button) findViewById(R.id.button_Reset);
         buttonSave = (Button) findViewById(R.id.button_Save);
 
+        textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
-        textViewStudy = (TextView) findViewById(R.id.textView_Study);
         textViewTodayDate.setText(today.getYear() + "년 " + today.getMonth() + "월 " + today.getDay() + "일");
+        convertDate = today.getYear() * YEAR_TO_CONVERTDATE + today.getMonth() * MONTH_TO_CONVERTDATE + today.getDay();
 
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
@@ -73,10 +86,39 @@ public class TaskActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentTime = SystemClock.elapsedRealtime() - chronometer.getBase();
-                convertTime = (int) currentTime / 1000;
+                currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,2) + chronometer.getText().toString().substring(3));
+                currentTimeToSeconds = ((currentTime / 100) * SECONDS_PER_MINUTE) + (currentTime % 100);
 
-                textViewStudy.setText(chronometer.getText());
+                switch(switchWhatToDo) {
+                    case 1:
+                        dbManager.insert(convertDate, "공부", currentTimeToSeconds);
+                        setText();
+                        break;
+                    case 2:
+                        dbManager.insert(convertDate, "직장", currentTimeToSeconds);
+                        setText();
+                        break;
+                    case 3:
+                        dbManager.insert(convertDate, "취미", currentTimeToSeconds);
+                        setText();
+                        break;
+                    case 4:
+                        dbManager.insert(convertDate, "운동", currentTimeToSeconds);
+                        setText();
+                        break;
+                    case 5:
+                        dbManager.insert(convertDate, "데이트", currentTimeToSeconds);
+                        setText();
+                        break;
+                    case 6:
+                        dbManager.insert(convertDate, "이동", currentTimeToSeconds);
+                        setText();
+                        break;
+                    case 7:
+                        dbManager.insert(convertDate, "기타", currentTimeToSeconds);
+                        setText();
+                        break;
+                }
             }
         });
     }
@@ -94,11 +136,12 @@ public class TaskActivity extends AppCompatActivity {
     }
 
     public void onClickStart(View view) {
-        TextView textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
+        textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         switch(view.getId()) {
             case R.id.startStudy:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("공부");
+                    switchWhatToDo = 1;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -107,6 +150,7 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startWork:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("직장");
+                    switchWhatToDo = 2;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -115,6 +159,7 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startHobby:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("취미");
+                    switchWhatToDo = 3;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -123,6 +168,7 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startWorkout:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("운동");
+                    switchWhatToDo = 4;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -131,6 +177,7 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startDate:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("데이트");
+                    switchWhatToDo = 5;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -139,6 +186,7 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startMove:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("이동");
+                    switchWhatToDo = 6;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -147,6 +195,7 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startOther:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("기타");
+                    switchWhatToDo = 7;
                     break;
                 } else {
                     Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
@@ -183,5 +232,120 @@ public class TaskActivity extends AppCompatActivity {
         }
         Toast.makeText(TaskActivity.this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         lastTimeBackPressed = System.currentTimeMillis();
+    }
+
+    public void setText() {
+        textViewStudy = (TextView) findViewById(R.id.textView_Study);
+        textViewWork = (TextView) findViewById(R.id.textView_Work);
+        textViewHobby = (TextView) findViewById(R.id.textView_Hobby);
+        textViewWorkout = (TextView) findViewById(R.id.textView_Workout);
+        textViewDate = (TextView) findViewById(R.id.textView_Date);
+        textViewMove = (TextView) findViewById(R.id.textView_Move);
+        textViewOther = (TextView) findViewById(R.id.textView_Other);
+
+        int timeStudy = dbManager.getTime("공부");
+        if (timeStudy / SECONDS_PER_MINUTE < 10) {
+            if (timeStudy % SECONDS_PER_MINUTE < 10) {
+                textViewStudy.setText("0" + Integer.toString(timeStudy / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeStudy % SECONDS_PER_MINUTE));
+            } else {
+                textViewStudy.setText("0" + Integer.toString(timeStudy / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeStudy % SECONDS_PER_MINUTE));
+            }
+         } else {
+            if (timeStudy % SECONDS_PER_MINUTE < 10) {
+                textViewStudy.setText(Integer.toString(timeStudy / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeStudy % SECONDS_PER_MINUTE));
+            } else {
+                textViewStudy.setText(Integer.toString(timeStudy / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeStudy % SECONDS_PER_MINUTE));
+            }
+        }
+
+        int timeWork = dbManager.getTime("직장");
+        if (timeWork / SECONDS_PER_MINUTE < 10) {
+            if (timeWork % SECONDS_PER_MINUTE < 10) {
+                textViewWork.setText("0" + Integer.toString(timeWork / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeWork % SECONDS_PER_MINUTE));
+            } else {
+                textViewWork.setText("0" + Integer.toString(timeWork / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeWork % SECONDS_PER_MINUTE));
+            }
+        } else {
+            if (timeWork % SECONDS_PER_MINUTE < 10) {
+                textViewWork.setText(Integer.toString(timeWork / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeWork % SECONDS_PER_MINUTE));
+            } else {
+                textViewWork.setText(Integer.toString(timeWork / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeWork % SECONDS_PER_MINUTE));
+            }
+        }
+
+        int timeHobby = dbManager.getTime("취미");
+        if (timeHobby / SECONDS_PER_MINUTE < 10) {
+            if (timeHobby % SECONDS_PER_MINUTE < 10) {
+                textViewHobby.setText("0" + Integer.toString(timeHobby / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeHobby % SECONDS_PER_MINUTE));
+            } else {
+                textViewHobby.setText("0" + Integer.toString(timeHobby / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeHobby % SECONDS_PER_MINUTE));
+            }
+        } else {
+            if (timeHobby % SECONDS_PER_MINUTE < 10) {
+                textViewHobby.setText(Integer.toString(timeHobby / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeHobby % SECONDS_PER_MINUTE));
+            } else {
+                textViewHobby.setText(Integer.toString(timeHobby / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeHobby % SECONDS_PER_MINUTE));
+            }
+        }
+
+        int timeWorkout = dbManager.getTime("운동");
+        if (timeWorkout / SECONDS_PER_MINUTE < 10) {
+            if (timeWorkout % SECONDS_PER_MINUTE < 10) {
+                textViewWorkout.setText("0" + Integer.toString(timeWorkout / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeWorkout % SECONDS_PER_MINUTE));
+            } else {
+                textViewWorkout.setText("0" + Integer.toString(timeWorkout / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeWorkout % SECONDS_PER_MINUTE));
+            }
+        } else {
+            if (timeWorkout % SECONDS_PER_MINUTE < 10) {
+                textViewWorkout.setText(Integer.toString(timeWorkout / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeWorkout % SECONDS_PER_MINUTE));
+            } else {
+                textViewWorkout.setText(Integer.toString(timeWorkout / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeWorkout % SECONDS_PER_MINUTE));
+            }
+        }
+
+        int timeDate = dbManager.getTime("데이트");
+        if (timeDate / SECONDS_PER_MINUTE < 10) {
+            if (timeDate % SECONDS_PER_MINUTE < 10) {
+                textViewDate.setText("0" + Integer.toString(timeDate / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeDate % SECONDS_PER_MINUTE));
+            } else {
+                textViewDate.setText("0" + Integer.toString(timeDate / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeDate % SECONDS_PER_MINUTE));
+            }
+        } else {
+            if (timeDate % SECONDS_PER_MINUTE < 10) {
+                textViewDate.setText(Integer.toString(timeDate / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeDate % SECONDS_PER_MINUTE));
+            } else {
+                textViewDate.setText(Integer.toString(timeDate / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeDate % SECONDS_PER_MINUTE));
+            }
+        }
+
+        int timeMove = dbManager.getTime("이동");
+        if (timeMove / SECONDS_PER_MINUTE < 10) {
+            if (timeMove % SECONDS_PER_MINUTE < 10) {
+                textViewMove.setText("0" + Integer.toString(timeMove / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeMove % SECONDS_PER_MINUTE));
+            } else {
+                textViewMove.setText("0" + Integer.toString(timeMove / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeMove % SECONDS_PER_MINUTE));
+            }
+        } else {
+            if (timeMove % SECONDS_PER_MINUTE < 10) {
+                textViewMove.setText(Integer.toString(timeMove / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeMove % SECONDS_PER_MINUTE));
+            } else {
+                textViewMove.setText(Integer.toString(timeMove / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeMove % SECONDS_PER_MINUTE));
+            }
+        }
+
+        int timeOther = dbManager.getTime("기타");
+        if (timeOther / SECONDS_PER_MINUTE < 10) {
+            if (timeOther % SECONDS_PER_MINUTE < 10) {
+                textViewOther.setText("0" + Integer.toString(timeOther / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeOther % SECONDS_PER_MINUTE));
+            } else {
+                textViewOther.setText("0" + Integer.toString(timeOther / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeOther % SECONDS_PER_MINUTE));
+            }
+        } else {
+            if (timeOther % SECONDS_PER_MINUTE < 10) {
+                textViewOther.setText(Integer.toString(timeOther / SECONDS_PER_MINUTE) + ":0" + Integer.toString(timeOther % SECONDS_PER_MINUTE));
+            } else {
+                textViewOther.setText(Integer.toString(timeOther / SECONDS_PER_MINUTE) + ":" + Integer.toString(timeOther % SECONDS_PER_MINUTE));
+            }
+        }
     }
 }
