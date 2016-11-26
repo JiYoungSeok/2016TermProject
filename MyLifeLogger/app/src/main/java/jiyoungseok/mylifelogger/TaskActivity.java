@@ -14,11 +14,15 @@ import android.widget.Toast;
 
 public class TaskActivity extends AppCompatActivity {
 
-    Button buttonStart, buttonStop, buttonReset;
-    TextView textViewTodayDate;
+    Button buttonStart, buttonStop, buttonReset, buttonSave;
+    TextView textViewTodayDate, textViewStudy;
+    Chronometer chronometer;
 
     private long lastTimeBackPressed;
     private long timeWhenStopped = 0;
+    private long currentTime;
+    private int convertTime;
+    private boolean isTimerRun = false;
 
     Today today = new Today();
 
@@ -30,17 +34,20 @@ public class TaskActivity extends AppCompatActivity {
         buttonStart = (Button) findViewById(R.id.button_Start);
         buttonStop = (Button) findViewById(R.id.button_Stop);
         buttonReset = (Button) findViewById(R.id.button_Reset);
+        buttonSave = (Button) findViewById(R.id.button_Save);
 
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
+        textViewStudy = (TextView) findViewById(R.id.textView_Study);
         textViewTodayDate.setText(today.getYear() + "년 " + today.getMonth() + "월 " + today.getDay() + "일");
 
-        final Chronometer chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
 
         buttonStart.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                 chronometer.start();
+                isTimerRun = true;
             }
         });
 
@@ -49,6 +56,7 @@ public class TaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 chronometer.stop();
                 timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
+                isTimerRun = false;
             }
         });
 
@@ -57,6 +65,18 @@ public class TaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 timeWhenStopped = 0;
+                chronometer.stop();
+                isTimerRun = false;
+            }
+        });
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+                convertTime = (int) currentTime / 1000;
+
+                textViewStudy.setText(chronometer.getText());
             }
         });
     }
@@ -68,10 +88,6 @@ public class TaskActivity extends AppCompatActivity {
                 monthOfYear = monthOfYear + 1;
                 textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
                 textViewTodayDate.setText(year + "년 " + monthOfYear + "월 " + dayOfMonth + "일");
-
-                today.setYear(year);
-                today.setMonth(monthOfYear - 1);
-                today.setDay(dayOfMonth);
             }
         };
         new DatePickerDialog(TaskActivity.this, dateSetListener, today.getYear(), today.getMonth(), today.getDay()).show();
@@ -81,26 +97,61 @@ public class TaskActivity extends AppCompatActivity {
         TextView textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         switch(view.getId()) {
             case R.id.startStudy:
-                textViewWhatToDo.setText("공부");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("공부");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case R.id.startWork:
-                textViewWhatToDo.setText("직장");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("직장");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case R.id.startHobby:
-                textViewWhatToDo.setText("취미");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("취미");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case R.id.startWorkout:
-                textViewWhatToDo.setText("운동");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("운동");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case R.id.startDate:
-                textViewWhatToDo.setText("데이트");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("데이트");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case R.id.startMove:
-                textViewWhatToDo.setText("이동");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("이동");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             case R.id.startOther:
-                textViewWhatToDo.setText("기타");
-                break;
+                if(isTimerRun == false) {
+                    textViewWhatToDo.setText("기타");
+                    break;
+                } else {
+                    Toast.makeText(TaskActivity.this, "타이머가 작동중입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
         }
     }
 

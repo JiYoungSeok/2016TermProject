@@ -168,9 +168,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#56B37F">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="저장"
+            android:id="@+id/button_Save"
+            android:background="#56B37F"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="385dp"
-        android:orientation="vertical"
-        android:background="@drawable/border">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -196,7 +211,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="00:00"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Study"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -224,7 +240,7 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="직장"
-                android:gravity="center"/>
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -234,7 +250,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="00:00"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Work"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -262,7 +279,7 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="취미"
-                android:gravity="center"/>
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -272,7 +289,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="00:00"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Hobby"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -300,7 +318,7 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="운동"
-                android:gravity="center"/>
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -310,7 +328,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="00:00"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Workout"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -338,7 +357,7 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="데이트"
-                android:gravity="center"/>
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -348,7 +367,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="00:00"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Date"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -376,7 +396,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="이동"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Move"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -424,7 +445,8 @@
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="00:00"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/textView_Other"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -437,21 +459,6 @@
                 android:onClick="onClickStart"
                 android:layout_marginRight="20dp"/>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#56B37F">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="저장"
-            android:background="#56B37F"/>
-
     </LinearLayout>
 
 </LinearLayout>
