@@ -3,20 +3,32 @@ package jiyoungseok.mylifelogger;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LogActivity extends AppCompatActivity {
 
-    private double currentlat, currentlon;
+    //static Double latitude = 0.0;
+    //static Double longitude = 0.0;
+
+    Double latitude;
+    Double longitude;
+
     TextView textViewLatitude, textViewLongitude;
     Button buttonCheckLocation;
+
+    LocationManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,30 +49,74 @@ public class LogActivity extends AppCompatActivity {
             alert.show();
         }
 
-        init();
-
         textViewLatitude = (TextView) findViewById(R.id.textView_Latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_Longitude);
 
         buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
 
         buttonCheckLocation.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textViewLatitude.setText(Double.toString(currentlat));
-                textViewLongitude.setText(Double.toString(currentlon));
+            public void onClick (View v) {
+                startLocationService();
             }
         });
     }
 
-    public void init() {
-        GpsInfo gps = new GpsInfo(this);
+//    private void startLocationService() {
+//        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        GpsInfo gpsListener = new GpsInfo();
+//
+//        try {
+//            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
+//            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, gpsListener);
+//        } catch (SecurityException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        latitude = gpsListener.latitude ;
+//        longitude = gpsListener.longitude ;
+//
+//        textViewLatitude.setText(String.valueOf(latitude));
+//        textViewLongitude.setText(String.valueOf(longitude));
+//    }
 
-        if (gps.isGetLocation()) {
-            currentlat = gps.getLatitude();
-            currentlon = gps.getLongitude();
+    private void startLocationService () {
+        manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        long minTime = 1000;
+        float minDistance = 1;
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
+        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, mLocationListener);
+        manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, mLocationListener);
+
+        textViewLatitude.setText(String.valueOf(latitude));
+        textViewLongitude.setText(String.valueOf(longitude));
     }
+
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
 
     public void onClickChangePage(View view) {
         switch(view.getId()) {
