@@ -63,7 +63,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="187dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#82F9B7">
 
@@ -168,7 +168,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:background="#56B37F">
 
         <Button
@@ -185,17 +185,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="385dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#2E8B57">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#82F9B7">
+            android:background="#F0FFF0"
+            android:id="@+id/startStudy"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -205,7 +208,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -214,27 +217,29 @@
                 android:gravity="center"
                 android:id="@+id/textView_Study"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startStudy"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp" />
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startStudy"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp" />-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#78EFAD">
+            android:background="#F0FFF0"
+            android:id="@+id/startWork"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -244,7 +249,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -253,27 +258,29 @@
                 android:gravity="center"
                 android:id="@+id/textView_Work"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startWork"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp"/>
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startWork"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#6EE5A3">
+            android:background="#F0FFF0"
+            android:id="@+id/startHobby"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -283,7 +290,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -292,27 +299,29 @@
                 android:gravity="center"
                 android:id="@+id/textView_Hobby"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startHobby"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp"/>
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startHobby"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#5AD18F">
+            android:background="#F0FFF0"
+            android:id="@+id/startWorkout"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -322,7 +331,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -331,27 +340,29 @@
                 android:gravity="center"
                 android:id="@+id/textView_Workout"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startWorkout"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp"/>
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startWorkout"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#46BD7B">
+            android:background="#F0FFF0"
+            android:id="@+id/startDate"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -361,7 +372,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -370,27 +381,29 @@
                 android:gravity="center"
                 android:id="@+id/textView_Date"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startDate"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp"/>
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startDate"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#56B37F">
+            android:background="#F0FFF0"
+            android:id="@+id/startMove"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -400,7 +413,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -409,27 +422,29 @@
                 android:gravity="center"
                 android:id="@+id/textView_Move"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startMove"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp"/>
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startMove"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="#F0FFF0">
+            android:background="#F0FFF0"
+            android:id="@+id/startOther"
+            android:onClick="onClickStart">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -439,7 +454,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -448,16 +463,16 @@
                 android:gravity="center"
                 android:id="@+id/textView_Other"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:text="선택"
-                android:id="@+id/startOther"
-                android:onClick="onClickStart"
-                android:layout_marginRight="20dp"/>
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="15sp"-->
+                <!--android:text="선택"-->
+                <!--android:id="@+id/startOther"-->
+                <!--android:onClick="onClickStart"-->
+                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
     </LinearLayout>
 
