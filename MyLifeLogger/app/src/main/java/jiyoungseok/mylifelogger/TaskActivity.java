@@ -2,6 +2,7 @@ package jiyoungseok.mylifelogger;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -158,6 +159,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startStudy:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("공부");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
+
                     switchWhatToDo = 1;
                     break;
                 } else {
@@ -167,6 +177,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startWork:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("직장");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWork.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
+
                     switchWhatToDo = 2;
                     break;
                 } else {
@@ -176,6 +195,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startHobby:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("취미");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startHobby.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
+
                     switchWhatToDo = 3;
                     break;
                 } else {
@@ -185,6 +213,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startWorkout:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("운동");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
+
                     switchWhatToDo = 4;
                     break;
                 } else {
@@ -194,6 +231,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startDate:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("데이트");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startDate.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
+
                     switchWhatToDo = 5;
                     break;
                 } else {
@@ -203,6 +249,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startMove:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("이동");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startMove.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
+
                     switchWhatToDo = 6;
                     break;
                 } else {
@@ -212,6 +267,15 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.startOther:
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("기타");
+
+                    startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
+                    startOther.setBackgroundColor(Color.parseColor("#82F9B7"));
+
                     switchWhatToDo = 7;
                     break;
                 } else {
