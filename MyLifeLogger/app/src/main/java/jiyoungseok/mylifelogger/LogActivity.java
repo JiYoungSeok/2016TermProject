@@ -35,7 +35,7 @@ public class LogActivity extends AppCompatActivity {
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("GPS를 켜야 위치정보를 받아올 수 있습니다..\n GPS를 켜주시기 바랍니다.").setCancelable(false).setPositiveButton("GPS 켜기", new DialogInterface.OnClickListener() {
+            builder.setMessage("GPS를 켜야 위치정보를 받아올 수 있습니다.\nGPS를 켜주시기 바랍니다.").setCancelable(false).setPositiveButton("GPS 켜기", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Intent gpsOptionIntent = new Intent (Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(gpsOptionIntent);

@@ -7,6 +7,7 @@ import android.icu.util.Calendar;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -61,6 +62,8 @@ public class TaskActivity extends AppCompatActivity {
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
         textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
         convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
+        Log.d("convertDate : ", String.valueOf(convertDate));
+        iMonth = iMonth - 1;
 
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
