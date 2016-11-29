@@ -7,12 +7,15 @@ import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,7 @@ public class LogActivity extends AppCompatActivity {
 
     TextView textViewTodayDate, textViewCurrentTime, textViewLatitude, textViewLongitude;
     EditText editTextEvent, editTextMemo;
-    Button buttonCheckLocation, buttonSaveLocation;
+    Button buttonCheckLocation, buttonGetImage, buttonSaveLocation;
 
     LocationManager manager;
     LogDBManager dbManager = new LogDBManager(this, "log.db", null, 1);
@@ -32,6 +35,10 @@ public class LogActivity extends AppCompatActivity {
     final int SECONDS_PER_HOUR = 3600;
     final int YEAR_TO_CONVERTDATE = 10000;
     final int MONTH_TO_CONVERTDATE = 100;
+
+    private ImageView imageView;
+    private Uri myImageCaptureUri;
+    private String absolutePath;
 
     private int convertDate, convertTime;
     private int iYear, iMonth, iDate, iHour, iMinute;
@@ -62,13 +69,22 @@ public class LogActivity extends AppCompatActivity {
         editTextEvent = (EditText) findViewById(R.id.editText_Event);
         editTextMemo = (EditText) findViewById(R.id.editText_Memo);
 
+        imageView = (ImageView) findViewById(R.id.imageView);
+
         buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
+        buttonGetImage = (Button) findViewById(R.id.button_GetImage);
         buttonSaveLocation = (Button) findViewById(R.id.button_SaveLocation);
 
         buttonCheckLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick (View v) {
                 startLocationService();
                 isCheckLocation = true;
+            }
+        });
+
+        buttonGetImage.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
             }
         });
 

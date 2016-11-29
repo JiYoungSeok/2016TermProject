@@ -1,6 +1,7 @@
 package jiyoungseok.mylifelogger;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    LogDBManager logDBManager = new LogDBManager(this, "log.db", null, 1);
+
+    ArrayList<LogList> myLoggerList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +36,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng seoul = new LatLng(37.56, 126.97);
-        mMap.addMarker(new MarkerOptions().position(seoul).title("Seoul"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(seoul));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        logDBManager.showMarker(myLoggerList);
+        LatLng openMap = new LatLng(myLoggerList.get(0).getLatitude(), myLoggerList.get(1).getLongitude());
+
+        for (int i = 0; i < myLoggerList.size(); i++) {
+            LatLng marker = new LatLng(myLoggerList.get(i).getLatitude(), myLoggerList.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(marker).title(myLoggerList.get(i).getMemo()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+
+            if(i != 0) {
+                mMap.addPolyline(new PolylineOptions().geodesic(true).add(new LatLng(Double.valueOf(myLoggerList.get(i - 1).getLatitude()), Double.valueOf(myLoggerList.get(i - 1).getLongitude())), new LatLng(Double.valueOf(myLoggerList.get(i).getLatitude()), Double.valueOf(myLoggerList.get(i).getLongitude()))).width(5).color(Color.RED));
+            }
+        }
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(openMap, 13));
     }
 
     public void onClickChangePage(View view) {
