@@ -13,7 +13,6 @@ public class TaskDBManager extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER , category TEXT , latitude REAL, longitude REAL, time INTEGER);");
     }
 
     @Override

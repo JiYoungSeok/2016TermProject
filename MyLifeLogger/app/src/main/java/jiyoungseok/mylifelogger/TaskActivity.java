@@ -36,7 +36,8 @@ public class TaskActivity extends AppCompatActivity {
     LinearLayout startStudy, startWork, startHobby, startWorkout, startDate, startMove, startOther;
     Chronometer chronometer;
 
-    final TaskDBManager dbManager = new TaskDBManager(this, "task.db", null, 1);
+    TaskDBManager dbManager = new TaskDBManager(this, "task.db", null, 1);
+
     final int SECONDS_PER_MINUTE = 60;
     final int SECONDS_PER_HOUR = 3600;
     final int YEAR_TO_CONVERTDATE = 10000;

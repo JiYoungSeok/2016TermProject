@@ -1,22 +1,20 @@
 package jiyoungseok.mylifelogger;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LogActivity extends AppCompatActivity {
 
@@ -28,11 +26,17 @@ public class LogActivity extends AppCompatActivity {
     Button buttonCheckLocation, buttonSaveLocation;
 
     LocationManager manager;
+    LogDBManager dbManager = new LogDBManager(this, "log.db", null, 1);
 
+    final int SECONDS_PER_MINUTE = 60;
+    final int SECONDS_PER_HOUR = 3600;
     final int YEAR_TO_CONVERTDATE = 10000;
     final int MONTH_TO_CONVERTDATE = 100;
 
+    private int convertDate, convertTime;
     private int iYear, iMonth, iDate, iHour, iMinute;
+    private String event, memo;
+    private boolean isCheckLocation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +56,34 @@ public class LogActivity extends AppCompatActivity {
         textViewLatitude = (TextView) findViewById(R.id.textView_Latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_Longitude);
 
-        buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
-
         textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
-        textViewCurrentTime.setText(iHour + "시 " + iMinute + "분");
+        textViewCurrentTime.setText("현재시간 : " + iHour + "시 " + iMinute + "분");
+
+        editTextEvent = (EditText) findViewById(R.id.editText_Event);
+        editTextMemo = (EditText) findViewById(R.id.editText_Memo);
+
+        buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
+        buttonSaveLocation = (Button) findViewById(R.id.button_SaveLocation);
 
         buttonCheckLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick (View v) {
                 startLocationService();
+                isCheckLocation = true;
+            }
+        });
+
+        buttonSaveLocation.setOnClickListener(new Button.OnClickListener() {
+            public void onClick (View v) {
+                if(isCheckLocation) {
+                    convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
+                    convertTime = iHour * SECONDS_PER_HOUR + iMinute * SECONDS_PER_MINUTE;
+                    event = editTextEvent.getText().toString();
+                    memo = editTextMemo.getText().toString();
+
+                    dbManager.insert(convertDate, convertTime, latitude, longitude, event, memo);
+                } else {
+                    Toast.makeText(LogActivity.this, "위치 확인을 먼저 해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
