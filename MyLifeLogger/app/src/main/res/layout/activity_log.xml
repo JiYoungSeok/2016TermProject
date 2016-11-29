@@ -192,24 +192,18 @@
         android:background="#82F9B7">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:text="사진촬영"
-            android:id="@+id/button_TakePhoto"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textStyle="bold"
             android:textSize="15sp"
             android:text="위치확인"
             android:id="@+id/button_CheckLocation"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textStyle="bold"
             android:textSize="15sp"
             android:text="상태저장"

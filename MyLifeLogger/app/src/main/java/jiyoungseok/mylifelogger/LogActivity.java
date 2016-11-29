@@ -15,12 +15,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LogActivity extends AppCompatActivity {
-
-    //static Double latitude = 0.0;
-    //static Double longitude = 0.0;
 
     Double latitude;
     Double longitude;
@@ -39,7 +35,7 @@ public class LogActivity extends AppCompatActivity {
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("GPS를 켜야 어플이 작동됩니다. GPS를 켜고 어플을 재시작 해주시기 바랍니다.").setCancelable(false).setPositiveButton("GPS 켜기", new DialogInterface.OnClickListener() {
+            builder.setMessage("GPS를 켜야 위치정보를 받아올 수 있습니다..\n GPS를 켜주시기 바랍니다.").setCancelable(false).setPositiveButton("GPS 켜기", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Intent gpsOptionIntent = new Intent (Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(gpsOptionIntent);
@@ -60,24 +56,6 @@ public class LogActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void startLocationService() {
-//        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//        GpsInfo gpsListener = new GpsInfo();
-//
-//        try {
-//            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
-//            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, gpsListener);
-//        } catch (SecurityException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        latitude = gpsListener.latitude ;
-//        longitude = gpsListener.longitude ;
-//
-//        textViewLatitude.setText(String.valueOf(latitude));
-//        textViewLongitude.setText(String.valueOf(longitude));
-//    }
 
     private void startLocationService () {
         manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -104,17 +82,14 @@ public class LogActivity extends AppCompatActivity {
 
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
-
         }
 
         @Override
         public void onProviderEnabled(String s) {
-
         }
 
         @Override
         public void onProviderDisabled(String s) {
-
         }
     };
 

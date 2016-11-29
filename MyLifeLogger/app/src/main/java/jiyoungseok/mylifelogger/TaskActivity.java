@@ -3,6 +3,7 @@ package jiyoungseok.mylifelogger;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,8 +36,9 @@ public class TaskActivity extends AppCompatActivity {
     private long lastTimeBackPressed;
     private long timeWhenStopped = 0;
     private boolean isTimerRun = false;
+    private int iYear, iMonth, iDate;
 
-    Today today = new Today();
+    //Today today = new Today();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,11 @@ public class TaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task);
 
         setText();
+        Calendar today;
+        today = Calendar.getInstance();
+        iYear = today.get(Calendar.YEAR);
+        iMonth = today.get(Calendar.MONTH) + 1;
+        iDate = today.get(Calendar.DAY_OF_MONTH);
 
         buttonStart = (Button) findViewById(R.id.button_Start);
         buttonStop = (Button) findViewById(R.id.button_Stop);
@@ -52,8 +59,8 @@ public class TaskActivity extends AppCompatActivity {
 
         textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
-        textViewTodayDate.setText(today.getYear() + "년 " + today.getMonth() + "월 " + today.getDay() + "일");
-        convertDate = today.getYear() * YEAR_TO_CONVERTDATE + today.getMonth() * MONTH_TO_CONVERTDATE + today.getDay();
+        textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
+        convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
 
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
@@ -138,11 +145,16 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 monthOfYear = monthOfYear + 1;
+
                 textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
                 textViewTodayDate.setText(year + "년 " + monthOfYear + "월 " + dayOfMonth + "일");
+
+                iYear = year;
+                iMonth = monthOfYear - 1;
+                iDate = dayOfMonth;
             }
         };
-        new DatePickerDialog(TaskActivity.this, dateSetListener, today.getYear(), today.getMonth(), today.getDay()).show();
+        new DatePickerDialog(TaskActivity.this, dateSetListener, iYear, iMonth, iDate).show();
     }
 
     public void onClickStart(View view) {
@@ -160,7 +172,7 @@ public class TaskActivity extends AppCompatActivity {
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("공부");
 
-                    startStudy.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startStudy.setBackgroundColor(Color.parseColor("#61F3EB"));
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -179,7 +191,7 @@ public class TaskActivity extends AppCompatActivity {
                     textViewWhatToDo.setText("직장");
 
                     startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startWork.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startWork.setBackgroundColor(Color.parseColor("#61F3EB"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -198,7 +210,7 @@ public class TaskActivity extends AppCompatActivity {
 
                     startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startHobby.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startHobby.setBackgroundColor(Color.parseColor("#61F3EB"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -217,7 +229,7 @@ public class TaskActivity extends AppCompatActivity {
                     startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startWorkout.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#61F3EB"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -236,7 +248,7 @@ public class TaskActivity extends AppCompatActivity {
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startDate.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startDate.setBackgroundColor(Color.parseColor("#61F3EB"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
 
@@ -255,7 +267,7 @@ public class TaskActivity extends AppCompatActivity {
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startMove.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startMove.setBackgroundColor(Color.parseColor("#61F3EB"));
                     startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
 
                     switchWhatToDo = 6;
@@ -274,7 +286,7 @@ public class TaskActivity extends AppCompatActivity {
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startOther.setBackgroundColor(Color.parseColor("#82F9B7"));
+                    startOther.setBackgroundColor(Color.parseColor("#61F3EB"));
 
                     switchWhatToDo = 7;
                     break;

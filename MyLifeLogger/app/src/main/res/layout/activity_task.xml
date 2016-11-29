@@ -85,8 +85,9 @@
                 android:id="@+id/textView_TodayDate"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:text="달력"
@@ -105,7 +106,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textColor="#000000"
                 android:text="할 일을 선택하세요"
                 android:id="@+id/textView_WhatToDo"
@@ -116,8 +117,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textColor="#787878"
                 android:gravity="center"
                 android:id="@+id/chronometer"/>
         </LinearLayout>
@@ -133,7 +134,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#FFFFFF"
+                android:textColor="#0000CD"
                 android:text="시작"
                 android:id="@+id/button_Start"
                 android:onClick="onClickTimer"
@@ -212,21 +213,11 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Study"/>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startStudy"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -253,21 +244,10 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Work"/>
-
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startWork"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -294,21 +274,11 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Hobby"/>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startHobby"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -335,21 +305,11 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Workout"/>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startWorkout"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -376,21 +336,11 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Date"/>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startDate"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -417,21 +367,11 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Move"/>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startMove"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -458,21 +398,11 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#000000"
-                android:text="00:00"
+                android:textColor="#787878"
+                android:text=""
                 android:gravity="center"
                 android:id="@+id/textView_Other"/>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="15sp"-->
-                <!--android:text="선택"-->
-                <!--android:id="@+id/startOther"-->
-                <!--android:onClick="onClickStart"-->
-                <!--android:layout_marginRight="20dp"/>-->
         </LinearLayout>
     </LinearLayout>
 
