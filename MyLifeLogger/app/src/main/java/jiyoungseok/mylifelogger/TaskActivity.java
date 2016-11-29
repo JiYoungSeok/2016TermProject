@@ -1,10 +1,19 @@
 package jiyoungseok.mylifelogger;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.util.Calendar;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class TaskActivity extends AppCompatActivity {
+
+    Double latitude;
+    Double longitude;
 
     Button buttonStart, buttonStop, buttonReset, buttonSave;
     TextView textViewTodayDate, textViewWhatToDo;
@@ -39,14 +51,28 @@ public class TaskActivity extends AppCompatActivity {
     private boolean isTimerRun = false;
     private int iYear, iMonth, iDate;
 
-    //Today today = new Today();
+    LocationManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        setText();
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("GPS를 켜야 위치정보를 받아올 수 있습니다.\nGPS를 켜주시기 바랍니다.").setCancelable(false).setPositiveButton("GPS 켜기", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent gpsOptionIntent = new Intent (Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(gpsOptionIntent);
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
         Calendar today;
         today = Calendar.getInstance();
         iYear = today.get(Calendar.YEAR);
@@ -61,9 +87,11 @@ public class TaskActivity extends AppCompatActivity {
         textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
         textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
-        convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
-        Log.d("convertDate : ", String.valueOf(convertDate));
+
         iMonth = iMonth - 1;
+        convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
+
+        setText();
 
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
@@ -73,6 +101,8 @@ public class TaskActivity extends AppCompatActivity {
                 chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                 chronometer.start();
                 isTimerRun = true;
+
+                startLocationService();
             }
         });
 
@@ -108,31 +138,31 @@ public class TaskActivity extends AppCompatActivity {
 
                     switch (switchWhatToDo) {
                         case 1:
-                            dbManager.insert(convertDate, "공부", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "공부", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                         case 2:
-                            dbManager.insert(convertDate, "직장", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "직장", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                         case 3:
-                            dbManager.insert(convertDate, "취미", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "취미", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                         case 4:
-                            dbManager.insert(convertDate, "운동", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "운동", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                         case 5:
-                            dbManager.insert(convertDate, "데이트", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "데이트", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                         case 6:
-                            dbManager.insert(convertDate, "이동", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "이동", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                         case 7:
-                            dbManager.insert(convertDate, "기타", currentTimeToSeconds);
+                            dbManager.insert(convertDate, "기타", latitude, longitude, currentTimeToSeconds);
                             setText();
                             break;
                     }
@@ -155,6 +185,9 @@ public class TaskActivity extends AppCompatActivity {
                 iYear = year;
                 iMonth = monthOfYear - 1;
                 iDate = dayOfMonth;
+
+                convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
+                setText();
             }
         };
         new DatePickerDialog(TaskActivity.this, dateSetListener, iYear, iMonth, iDate).show();
@@ -300,6 +333,42 @@ public class TaskActivity extends AppCompatActivity {
         }
     }
 
+
+    private void startLocationService () {
+        manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        long minTime = 1000;
+        float minDistance = 1;
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
+        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, mLocationListener);
+        manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, mLocationListener);
+
+        Toast.makeText(this, "위도 : " + latitude + "\n경도 : " + longitude, Toast.LENGTH_SHORT).show();
+    }
+
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+        }
+    };
+
     public void onClickChangePage(View view) {
         switch(view.getId()) {
             case R.id.button_Task:
@@ -339,13 +408,13 @@ public class TaskActivity extends AppCompatActivity {
         textViewMove = (TextView) findViewById(R.id.textView_Move);
         textViewOther = (TextView) findViewById(R.id.textView_Other);
 
-        int timeStudy = dbManager.getTime("공부");
-        int timeWork = dbManager.getTime("직장");
-        int timeHobby = dbManager.getTime("취미");
-        int timeWorkout = dbManager.getTime("운동");
-        int timeDate = dbManager.getTime("데이트");
-        int timeMove = dbManager.getTime("이동");
-        int timeOther = dbManager.getTime("기타");
+        int timeStudy = dbManager.getTime(convertDate, "공부");
+        int timeWork = dbManager.getTime(convertDate, "직장");
+        int timeHobby = dbManager.getTime(convertDate, "취미");
+        int timeWorkout = dbManager.getTime(convertDate, "운동");
+        int timeDate = dbManager.getTime(convertDate, "데이트");
+        int timeMove = dbManager.getTime(convertDate, "이동");
+        int timeOther = dbManager.getTime(convertDate, "기타");
 
         textViewStudy.setText(Integer.toString(timeStudy / SECONDS_PER_HOUR) + "시간 " + Integer.toString((timeStudy % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE) + "분 " + Integer.toString(timeStudy % SECONDS_PER_MINUTE) + "초");
         textViewWork.setText(Integer.toString(timeWork / SECONDS_PER_HOUR) + "시간 " + Integer.toString((timeWork % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE) + "분 " + Integer.toString(timeWork % SECONDS_PER_MINUTE) + "초");

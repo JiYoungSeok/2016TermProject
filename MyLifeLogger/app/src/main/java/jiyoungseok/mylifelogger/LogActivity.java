@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class LogActivity extends AppCompatActivity {
@@ -21,34 +23,39 @@ public class LogActivity extends AppCompatActivity {
     Double latitude;
     Double longitude;
 
-    TextView textViewLatitude, textViewLongitude;
-    Button buttonCheckLocation;
+    TextView textViewTodayDate, textViewCurrentTime, textViewLatitude, textViewLongitude;
+    EditText editTextEvent, editTextMemo;
+    Button buttonCheckLocation, buttonSaveLocation;
 
     LocationManager manager;
+
+    final int YEAR_TO_CONVERTDATE = 10000;
+    final int MONTH_TO_CONVERTDATE = 100;
+
+    private int iYear, iMonth, iDate, iHour, iMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Calendar today;
+        today = Calendar.getInstance();
+        iYear = today.get(Calendar.YEAR);
+        iMonth = today.get(Calendar.MONTH) + 1;
+        iDate = today.get(Calendar.DAY_OF_MONTH);
+        iHour = today.get(Calendar.HOUR_OF_DAY);
+        iMinute = today.get(Calendar.MINUTE);
 
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("GPS를 켜야 위치정보를 받아올 수 있습니다.\nGPS를 켜주시기 바랍니다.").setCancelable(false).setPositiveButton("GPS 켜기", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent gpsOptionIntent = new Intent (Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(gpsOptionIntent);
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-
+        textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
+        textViewCurrentTime = (TextView) findViewById(R.id.textView_currentTime);
         textViewLatitude = (TextView) findViewById(R.id.textView_Latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_Longitude);
 
         buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
+
+        textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
+        textViewCurrentTime.setText(iHour + "시 " + iMinute + "분");
 
         buttonCheckLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick (View v) {

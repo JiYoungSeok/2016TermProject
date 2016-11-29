@@ -13,31 +13,33 @@ public class TaskDBManager extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER , category TEXT , time INTEGER);");
+        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER , category TEXT , latitude REAL, longitude REAL, time INTEGER);");
     }
 
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public void insert(int date, String category, int time) {
+    public void insert(int date, String category, Double latitude, Double longitude, int time) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO database VALUES (NULL, " + date + ", '" + category + "', " + time + ");");
+        Log.d("SQL", "Date : " + date + " category : " + category + " latitude : " + latitude + " longitude : " + longitude + " time + " + time);
+        db.execSQL("INSERT INTO database VALUES (NULL, " + date + ", '" + category + "', " + latitude + ", " + longitude + ", " + time + ");");
         db.close();
     }
 
-    public int getTime(String getCategory) {
+    public int getTime(int getDate, String getCategory) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM database", null);
 
-        Log.d("getCategory : " , getCategory);
+        Log.d("SQL", "Date : " + getDate + "Category : " + getCategory);
         int todayTotalTime = 0;
 
         while (cursor.moveToNext()) {
+            int date = cursor.getInt(cursor.getColumnIndex("date"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
             int time = cursor.getInt(cursor.getColumnIndex("time"));
 
-            if (category.equals(getCategory))
+            if ((getDate == date) && (category.equals(getCategory)))
             {
                 todayTotalTime = todayTotalTime + time;
             }

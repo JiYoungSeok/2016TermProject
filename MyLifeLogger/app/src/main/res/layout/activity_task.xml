@@ -87,9 +87,10 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:onClick="onClickCalendar"
                 android:background="@drawable/calendar"
+                android:text="   "
                 android:layout_marginRight="20dp"/>
 
         </LinearLayout>

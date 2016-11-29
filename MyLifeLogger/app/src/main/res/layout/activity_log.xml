@@ -63,7 +63,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="132dp"
+        android:layout_height="130dp"
         android:orientation="vertical"
         android:background="#82F9B7">
 
@@ -73,8 +73,9 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#000000"
-            android:text="Today"
-            android:gravity="center"/>
+            android:text=""
+            android:gravity="center"
+            android:id="@+id/textView_TodayDate"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -82,8 +83,9 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#000000"
-            android:text="2016 / 11 / 23"
-            android:gravity="center"/>
+            android:text=""
+            android:gravity="center"
+            android:id="@+id/textView_currentTime"/>
 
     </LinearLayout>
 
@@ -94,99 +96,140 @@
         android:background="#82F9B7">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:background="#82F9B7">
 
             <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
-                android:text="  위도 : "/>
+                android:text="위도 : "
+                android:gravity="center"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#787878"
+                android:gravity="center"
                 android:id = "@+id/textView_Latitude"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:background="#82F9B7">
 
             <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
-                android:text="  경도 : "/>
+                android:text="경도 : "
+                android:gravity="center"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#787878"
+                android:gravity="center"
                 android:id = "@+id/textView_Longitude"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:background="#82F9B7">
 
             <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
-                android:text="  사건 : "/>
+                android:text="이벤트 : "
+                android:gravity="center"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:id = "@+id/editText_Event"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
             android:background="#82F9B7">
 
+
             <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
-                android:text="  한일 : "/>
+                android:text="메모 : "
+                android:gravity="center"/>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="220dp"
-            android:orientation="horizontal"
-            android:background="#82F9B7">
-
-            <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
-                android:text="  사진 : "/>
+                android:gravity="center"
+                android:id = "@+id/editText_Memo"/>
 
         </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="220dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:background="#82F9B7">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="90dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textColor="#000000"-->
+                <!--android:text="  사진 : "/>-->
+
+        <!--</LinearLayout>-->
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:background="#82F9B7">
