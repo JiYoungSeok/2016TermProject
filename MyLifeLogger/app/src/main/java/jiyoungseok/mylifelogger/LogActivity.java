@@ -81,6 +81,9 @@ public class LogActivity extends AppCompatActivity {
                     memo = editTextMemo.getText().toString();
 
                     dbManager.insert(convertDate, convertTime, latitude, longitude, event, memo);
+
+                    editTextEvent.setText("");
+                    editTextMemo.setText("");
                 } else {
                     Toast.makeText(LogActivity.this, "위치 확인을 먼저 해주세요.", Toast.LENGTH_SHORT).show();
                 }
