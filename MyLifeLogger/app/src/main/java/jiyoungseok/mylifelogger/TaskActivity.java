@@ -384,18 +384,22 @@ public class TaskActivity extends AppCompatActivity {
             case R.id.button_Task:
                 Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
                 startActivity(moveToTask);
+                finish();
                 break;
             case R.id.button_Log:
                 Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
                 startActivity(moveToLog);
+                finish();
                 break;
             case R.id.button_Map:
                 Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
                 startActivity(moveToMap);
+                finish();
                 break;
             case R.id.button_Goal:
                 Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
                 startActivity(moveToGoal);
+                finish();
                 break;
         }
     }

@@ -105,6 +105,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 dbManager.delete(myLoggerList.get(tmp).getLatitude());
                                 Toast.makeText(MapActivity.this, "정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                 Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
+                                finish();
                                 startActivity(moveToMap);
                             }
                         });
@@ -136,6 +137,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     Toast.makeText(MapActivity.this, "정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                     Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
                                     startActivity(moveToMap);
+                                    finish();
                                 }
                             });
 
@@ -152,19 +154,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             case R.id.button_Task:
                 Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
                 startActivity(moveToTask);
+                finish();
                 break;
             case R.id.button_Log:
                 Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
                 startActivity(moveToLog);
+                finish();
                 break;
             case R.id.button_Map:
                 Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
                 startActivity(moveToMap);
+                finish();
                 break;
             case R.id.button_Goal:
                 Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
                 startActivity(moveToGoal);
+                finish();
                 break;
         }
+    }
+
+    public void onBackPressed() {
+        Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
+        startActivity(moveToTask);
+        finish();
     }
 }
