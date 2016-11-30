@@ -98,13 +98,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 dialog.cancel();
                             }
                         });
+
+                    AlertDialog alertDialog = builder.create();
+                    tmpAlertDialog = alertDialog;
+                    builder.show();
+
                 } else {
                     builder
                             .setTitle("정보")
                             .setCancelable(false)
                             .setMessage(
                                     "날짜 : " + (myLoggerList.get(tmp).getDate() / YEAR_TO_CONVERTDATE) + "년 " + ((myLoggerList.get(tmp).getDate() % YEAR_TO_CONVERTDATE) / MONTH_TO_CONVERTDATE) + "월 " + (myLoggerList.get(tmp).getDate() % MONTH_TO_CONVERTDATE) + "일" +
-                                    "\n시간 : " + myLoggerList.get(tmp).getTime() / SECONDS_PER_HOUR + "시 " + myLoggerList.get(tmp).getTime() % SECONDS_PER_HOUR + "분" +
+                                    "\n시간 : " + myLoggerList.get(tmp).getTime() / SECONDS_PER_HOUR + "시 " + (myLoggerList.get(tmp).getTime() % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE + "분" +
                                     "\n내용 : " + myLoggerList.get(tmp).getEvent() +
                                     "\n메모 : " + myLoggerList.get(tmp).getMemo())
                             .setView(popUpWindow)
@@ -114,11 +119,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                     dialog.cancel();
                                 }
                             });
-                }
 
-                AlertDialog alertDialog = builder.create();
-                tmpAlertDialog = alertDialog;
-                builder.show();
+                    AlertDialog alertDialog = builder.create();
+                    tmpAlertDialog = alertDialog;
+                    builder.show();
+                }
             }
         });
     }

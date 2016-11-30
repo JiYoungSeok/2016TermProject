@@ -5,7 +5,7 @@ public class LogList {
     private Double latitude, longitude;
     private String event, memo;
 
-    public void setType(int type) { this.date = type; }
+    public void setType(int type) { this.type = type; }
     public void setDate(int date) { this.date = date; }
     public void setTime(int time) { this.time = time; }
     public void setLatitude(Double latitude) { this.latitude = latitude; }
