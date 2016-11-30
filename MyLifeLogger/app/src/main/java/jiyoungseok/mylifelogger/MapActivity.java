@@ -22,8 +22,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private GoogleMap mMap;
 
-    TaskDBManager taskDBManager = new TaskDBManager(this, "task.db", null, 1);
-    LogDBManager logDBManager = new LogDBManager(this, "log.db", null, 1);
+    DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
 
     ArrayList<LogList> myLoggerList = new ArrayList<>();
 
@@ -39,8 +38,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        logDBManager.showMarker(myLoggerList);
-        taskDBManager.showMarker(myLoggerList);
+        dbManager.showMarker(myLoggerList);
         LatLng openMap = new LatLng(37.611013, 126.994625);
 
         for (int i = 0; i < myLoggerList.size(); i++) {

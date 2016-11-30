@@ -8,39 +8,40 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-public class TaskDBManager extends SQLiteOpenHelper{
-    public TaskDBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+public class DBManager  extends SQLiteOpenHelper {
+
+    public DBManager (Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super (context, name, factory, version);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate (SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER , time INTEGER, latitude REAL, longitude REAL, event TEXT, memo TEXT);");
     }
 
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public void insert(int date, String category, Double latitude, Double longitude, int time) {
+    public void insert (int date, int time, Double latitude, Double longitude, String event, String memo) {
         SQLiteDatabase db = getWritableDatabase();
-        Log.d("SQL", "Date : " + date + " category : " + category + " latitude : " + latitude + " longitude : " + longitude + " time + " + time);
-        db.execSQL("INSERT INTO database VALUES (NULL, " + date + ", '" + category + "', " + latitude + ", " + longitude + ", " + time + ");");
-        db.close();
+        Log.d("SQL", "Date : " + date + " Time : " + time + " Latitude : " + latitude + " Longitude : " + longitude + " Event : " + event + " Memo : " + memo);
+        db.execSQL("INSERT INTO database VALUES (NULL, " + date + ", " + time + ", " + latitude + ", " + longitude + ", '" + event + "', '" + memo + "');");
     }
 
-    public int getTime(int getDate, String getCategory) {
+    public int getTime(int getDate, String getEvent) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM database", null);
 
-        Log.d("SQL", "Date : " + getDate + "Category : " + getCategory);
+        Log.d("SQL", "Date : " + getDate + "Event : " + getEvent);
         int todayTotalTime = 0;
 
         while (cursor.moveToNext()) {
             int date = cursor.getInt(cursor.getColumnIndex("date"));
-            String category = cursor.getString(cursor.getColumnIndex("category"));
+            String event = cursor.getString(cursor.getColumnIndex("event"));
             int time = cursor.getInt(cursor.getColumnIndex("time"));
 
-            if ((getDate == date) && (category.equals(getCategory)))
+            if ((getDate == date) && (event.equals(getEvent)))
             {
                 todayTotalTime = todayTotalTime + time;
             }
@@ -53,20 +54,21 @@ public class TaskDBManager extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery("SELECT * FROM database", null);
 
         while (cursor.moveToNext()) {
-            int todayDate = cursor.getInt(cursor.getColumnIndex("date"));
-            int currentTime = cursor.getInt(cursor.getColumnIndex("time"));
+            int date = cursor.getInt(cursor.getColumnIndex("date"));
+            int time = cursor.getInt(cursor.getColumnIndex("time"));
             Double latitude = cursor.getDouble(cursor.getColumnIndex("latitude"));
             Double longitude = cursor.getDouble(cursor.getColumnIndex("longitude"));
-            String event = cursor.getString(cursor.getColumnIndex("category"));
+            String event = cursor.getString(cursor.getColumnIndex("event"));
+            String memo = cursor.getString(cursor.getColumnIndex("memo"));
 
             LogList logList = new LogList();
 
-            logList.setTodayDate(todayDate);
-            logList.setCurrentTime(currentTime);
+            logList.setDate(date);
+            logList.setTime(time);
             logList.setLatitude(latitude);
             logList.setLongitude(longitude);
             logList.setEvent(event);
-            logList.setMemo("");
+            logList.setMemo(memo);
 
             al.add(logList);
         }

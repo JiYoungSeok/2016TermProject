@@ -38,7 +38,8 @@ public class TaskActivity extends AppCompatActivity {
     LinearLayout startStudy, startWork, startHobby, startWorkout, startDate, startMove, startOther;
     Chronometer chronometer;
 
-    TaskDBManager dbManager = new TaskDBManager(this, "task.db", null, 1);
+    DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
+    LocationManager manager;
 
     final int SECONDS_PER_MINUTE = 60;
     final int SECONDS_PER_HOUR = 3600;
@@ -53,8 +54,6 @@ public class TaskActivity extends AppCompatActivity {
     private long timeWhenStopped = 0;
     private boolean isTimerRun = false;
     private int iYear, iMonth, iDate;
-
-    LocationManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +104,8 @@ public class TaskActivity extends AppCompatActivity {
 
                 if (latitude == null || longitude == null) {
                     Toast.makeText(TaskActivity.this, "위치정보를 확인중입니다. 잠시 후 다시 시도하세요.", Toast.LENGTH_SHORT).show();
+                    chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                     chronometer.stop();
-                    timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
                     isTimerRun = false;
                 } else {
                     Toast.makeText(TaskActivity.this, "위도 : " + latitude + "\n경도 : " + longitude, Toast.LENGTH_SHORT).show();
@@ -150,31 +149,31 @@ public class TaskActivity extends AppCompatActivity {
 
                     switch (switchWhatToDo) {
                         case 1:
-                            dbManager.insert(convertDate, "공부", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "공부", "");
                             setText();
                             break;
                         case 2:
-                            dbManager.insert(convertDate, "직장", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "직장", "");
                             setText();
                             break;
                         case 3:
-                            dbManager.insert(convertDate, "취미", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "취미", "");
                             setText();
                             break;
                         case 4:
-                            dbManager.insert(convertDate, "운동", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
                             setText();
                             break;
                         case 5:
-                            dbManager.insert(convertDate, "데이트", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
                             setText();
                             break;
                         case 6:
-                            dbManager.insert(convertDate, "이동", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
                             setText();
                             break;
                         case 7:
-                            dbManager.insert(convertDate, "기타", latitude, longitude, currentTimeToSeconds);
+                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
                             setText();
                             break;
                     }

@@ -29,7 +29,7 @@ public class LogActivity extends AppCompatActivity {
     Button buttonCheckLocation, buttonGetImage, buttonSaveLocation;
 
     LocationManager manager;
-    LogDBManager dbManager = new LogDBManager(this, "log.db", null, 1);
+    DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
 
     final int SECONDS_PER_MINUTE = 60;
     final int SECONDS_PER_HOUR = 3600;
@@ -75,7 +75,15 @@ public class LogActivity extends AppCompatActivity {
         buttonCheckLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick (View v) {
                 startLocationService();
-                isCheckLocation = true;
+
+                if (latitude == null || longitude == null) {
+                    textViewLatitude.setText("위치 정보 확인중..\n잠시후 다시 시도하세요.");
+                    textViewLongitude.setText("위치 정보 확인중..\n잠시후 다시 시도하세요.");
+                    isCheckLocation = false;
+                } else {
+                    textViewLatitude.setText(String.valueOf(latitude));
+                    textViewLongitude.setText(String.valueOf(longitude));
+                }
             }
         });
 
@@ -115,9 +123,6 @@ public class LogActivity extends AppCompatActivity {
         }
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, mLocationListener);
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, mLocationListener);
-
-        textViewLatitude.setText(String.valueOf(latitude));
-        textViewLongitude.setText(String.valueOf(longitude));
     }
 
     private final LocationListener mLocationListener = new LocationListener() {
