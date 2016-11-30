@@ -1,10 +1,11 @@
 package jiyoungseok.mylifelogger;
 
 public class LogList {
-    private int date, time;
+    private int type, date, time;
     private Double latitude, longitude;
     private String event, memo;
 
+    public void setType(int type) { this.date = type; }
     public void setDate(int date) { this.date = date; }
     public void setTime(int time) { this.time = time; }
     public void setLatitude(Double latitude) { this.latitude = latitude; }
@@ -12,6 +13,7 @@ public class LogList {
     public void setEvent(String event) { this.event = event; }
     public void setMemo(String memo) { this.memo = memo; }
 
+    public int getType() { return type; }
     public int getDate() { return date; }
     public int getTime() { return time; }
     public Double getLatitude() { return latitude; }

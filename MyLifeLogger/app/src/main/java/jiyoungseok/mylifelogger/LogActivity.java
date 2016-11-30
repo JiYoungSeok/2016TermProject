@@ -31,6 +31,7 @@ public class LogActivity extends AppCompatActivity {
     LocationManager manager;
     DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
 
+    final int TYPE_LOG_ACTIVITY = 2;
     final int SECONDS_PER_MINUTE = 60;
     final int SECONDS_PER_HOUR = 3600;
     final int YEAR_TO_CONVERTDATE = 10000;
@@ -83,6 +84,7 @@ public class LogActivity extends AppCompatActivity {
                 } else {
                     textViewLatitude.setText(String.valueOf(latitude));
                     textViewLongitude.setText(String.valueOf(longitude));
+                    isCheckLocation = true;
                 }
             }
         });
@@ -101,7 +103,7 @@ public class LogActivity extends AppCompatActivity {
                     event = editTextEvent.getText().toString();
                     memo = editTextMemo.getText().toString();
 
-                    dbManager.insert(convertDate, convertTime, latitude, longitude, event, memo);
+                    dbManager.insert(TYPE_LOG_ACTIVITY, convertDate, convertTime, latitude, longitude, event, memo);
 
                     editTextEvent.setText("");
                     editTextMemo.setText("");

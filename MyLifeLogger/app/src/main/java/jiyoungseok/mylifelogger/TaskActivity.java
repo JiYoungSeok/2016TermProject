@@ -41,6 +41,7 @@ public class TaskActivity extends AppCompatActivity {
     DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
     LocationManager manager;
 
+    final int TYPE_TASK_ACTIVITY = 1;
     final int SECONDS_PER_MINUTE = 60;
     final int SECONDS_PER_HOUR = 3600;
     final int YEAR_TO_CONVERTDATE = 10000;
@@ -90,8 +91,8 @@ public class TaskActivity extends AppCompatActivity {
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
         textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
 
-        iMonth = iMonth - 1;
         convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
+        iMonth = iMonth - 1;
 
         setText();
 
@@ -149,31 +150,31 @@ public class TaskActivity extends AppCompatActivity {
 
                     switch (switchWhatToDo) {
                         case 1:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "공부", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "공부", "");
                             setText();
                             break;
                         case 2:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "직장", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "직장", "");
                             setText();
                             break;
                         case 3:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "취미", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "취미", "");
                             setText();
                             break;
                         case 4:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
                             setText();
                             break;
                         case 5:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
                             setText();
                             break;
                         case 6:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
                             setText();
                             break;
                         case 7:
-                            dbManager.insert(convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
                             setText();
                             break;
                     }

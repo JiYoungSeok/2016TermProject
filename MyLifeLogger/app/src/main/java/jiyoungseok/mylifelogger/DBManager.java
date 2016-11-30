@@ -16,17 +16,17 @@ public class DBManager  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate (SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER , time INTEGER, latitude REAL, longitude REAL, event TEXT, memo TEXT);");
+        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER, date INTEGER , time INTEGER, latitude REAL, longitude REAL, event TEXT, memo TEXT);");
     }
 
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public void insert (int date, int time, Double latitude, Double longitude, String event, String memo) {
+    public void insert (int type, int date, int time, Double latitude, Double longitude, String event, String memo) {
         SQLiteDatabase db = getWritableDatabase();
-        Log.d("SQL", "Date : " + date + " Time : " + time + " Latitude : " + latitude + " Longitude : " + longitude + " Event : " + event + " Memo : " + memo);
-        db.execSQL("INSERT INTO database VALUES (NULL, " + date + ", " + time + ", " + latitude + ", " + longitude + ", '" + event + "', '" + memo + "');");
+        Log.d("SQL", "Type : " + type + "Date : " + date + " Time : " + time + " Latitude : " + latitude + " Longitude : " + longitude + " Event : " + event + " Memo : " + memo);
+        db.execSQL("INSERT INTO database VALUES (NULL, " + type + ", " + date + ", " + time + ", " + latitude + ", " + longitude + ", '" + event + "', '" + memo + "');");
     }
 
     public int getTime(int getDate, String getEvent) {
@@ -54,6 +54,7 @@ public class DBManager  extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM database", null);
 
         while (cursor.moveToNext()) {
+            int type = cursor.getInt(cursor.getColumnIndex("type"));
             int date = cursor.getInt(cursor.getColumnIndex("date"));
             int time = cursor.getInt(cursor.getColumnIndex("time"));
             Double latitude = cursor.getDouble(cursor.getColumnIndex("latitude"));
@@ -63,6 +64,7 @@ public class DBManager  extends SQLiteOpenHelper {
 
             LogList logList = new LogList();
 
+            logList.setType(type);
             logList.setDate(date);
             logList.setTime(time);
             logList.setLatitude(latitude);
