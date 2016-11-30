@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.gcm.Task;
+
 public class TaskActivity extends AppCompatActivity {
 
     Double latitude;
@@ -99,11 +101,20 @@ public class TaskActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                chronometer.start();
-                isTimerRun = true;
-
                 startLocationService();
+
+                if (latitude == null || longitude == null) {
+                    Toast.makeText(TaskActivity.this, "위치정보를 확인중입니다. 잠시 후 다시 시도하세요.", Toast.LENGTH_SHORT).show();
+                    chronometer.stop();
+                    timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
+                    isTimerRun = false;
+                } else {
+                    Toast.makeText(TaskActivity.this, "위도 : " + latitude + "\n경도 : " + longitude, Toast.LENGTH_SHORT).show();
+                    chronometer.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                    chronometer.start();
+                    isTimerRun = true;
+
+                }
             }
         });
 
@@ -346,8 +357,6 @@ public class TaskActivity extends AppCompatActivity {
         }
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, mLocationListener);
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, mLocationListener);
-
-        Toast.makeText(this, "위도 : " + latitude + "\n경도 : " + longitude, Toast.LENGTH_SHORT).show();
     }
 
     private final LocationListener mLocationListener = new LocationListener() {

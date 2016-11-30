@@ -16,10 +16,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    TaskDBManager taskDBManager = new TaskDBManager(this, "task.db", null, 1);
     LogDBManager logDBManager = new LogDBManager(this, "log.db", null, 1);
 
     ArrayList<LogList> myLoggerList = new ArrayList<>();
@@ -37,19 +40,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         logDBManager.showMarker(myLoggerList);
-        LatLng openMap = new LatLng(myLoggerList.get(0).getLatitude(), myLoggerList.get(1).getLongitude());
+        taskDBManager.showMarker(myLoggerList);
+        LatLng openMap = new LatLng(37.611013, 126.994625);
 
         for (int i = 0; i < myLoggerList.size(); i++) {
             LatLng marker = new LatLng(myLoggerList.get(i).getLatitude(), myLoggerList.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(marker).title(myLoggerList.get(i).getMemo()));
+            mMap.addMarker(new MarkerOptions().position(marker).title(myLoggerList.get(i).getEvent()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
 
             if(i != 0) {
-                mMap.addPolyline(new PolylineOptions().geodesic(true).add(new LatLng(Double.valueOf(myLoggerList.get(i - 1).getLatitude()), Double.valueOf(myLoggerList.get(i - 1).getLongitude())), new LatLng(Double.valueOf(myLoggerList.get(i).getLatitude()), Double.valueOf(myLoggerList.get(i).getLongitude()))).width(5).color(Color.RED));
+                mMap.addPolyline(new PolylineOptions().geodesic(true).add(new LatLng(Double.valueOf(myLoggerList.get(i - 1).getLatitude()), Double.valueOf(myLoggerList.get(i - 1).getLongitude())), new LatLng(Double.valueOf(myLoggerList.get(i).getLatitude()), Double.valueOf(myLoggerList.get(i).getLongitude()))).width(10).color(Color.RED));
             }
         }
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(openMap, 13));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(openMap, 12));
     }
 
     public void onClickChangePage(View view) {

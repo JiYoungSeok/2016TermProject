@@ -36,10 +36,6 @@ public class LogActivity extends AppCompatActivity {
     final int YEAR_TO_CONVERTDATE = 10000;
     final int MONTH_TO_CONVERTDATE = 100;
 
-    private ImageView imageView;
-    private Uri myImageCaptureUri;
-    private String absolutePath;
-
     private int convertDate, convertTime;
     private int iYear, iMonth, iDate, iHour, iMinute;
     private String event, memo;
@@ -55,7 +51,7 @@ public class LogActivity extends AppCompatActivity {
         iYear = today.get(Calendar.YEAR);
         iMonth = today.get(Calendar.MONTH) + 1;
         iDate = today.get(Calendar.DAY_OF_MONTH);
-        iHour = today.get(Calendar.HOUR_OF_DAY);
+        iHour = today.get(Calendar.HOUR_OF_DAY) + 9;
         iMinute = today.get(Calendar.MINUTE);
 
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
@@ -63,13 +59,14 @@ public class LogActivity extends AppCompatActivity {
         textViewLatitude = (TextView) findViewById(R.id.textView_Latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_Longitude);
 
+        if (iHour > 24) {
+           iHour = iHour - 24;
+        }
         textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
         textViewCurrentTime.setText("현재시간 : " + iHour + "시 " + iMinute + "분");
 
         editTextEvent = (EditText) findViewById(R.id.editText_Event);
         editTextMemo = (EditText) findViewById(R.id.editText_Memo);
-
-        imageView = (ImageView) findViewById(R.id.imageView);
 
         buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
         buttonGetImage = (Button) findViewById(R.id.button_GetImage);

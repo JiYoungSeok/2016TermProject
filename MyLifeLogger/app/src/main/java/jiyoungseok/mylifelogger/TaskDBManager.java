@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class TaskDBManager extends SQLiteOpenHelper{
     public TaskDBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super (context, name, factory, version);
@@ -44,5 +46,29 @@ public class TaskDBManager extends SQLiteOpenHelper{
             }
         }
         return todayTotalTime;
+    }
+
+    public void showMarker (ArrayList<LogList> al) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM database", null);
+
+        while (cursor.moveToNext()) {
+            int todayDate = cursor.getInt(cursor.getColumnIndex("date"));
+            int currentTime = cursor.getInt(cursor.getColumnIndex("time"));
+            Double latitude = cursor.getDouble(cursor.getColumnIndex("latitude"));
+            Double longitude = cursor.getDouble(cursor.getColumnIndex("longitude"));
+            String event = cursor.getString(cursor.getColumnIndex("category"));
+
+            LogList logList = new LogList();
+
+            logList.setTodayDate(todayDate);
+            logList.setCurrentTime(currentTime);
+            logList.setLatitude(latitude);
+            logList.setLongitude(longitude);
+            logList.setEvent(event);
+            logList.setMemo("");
+
+            al.add(logList);
+        }
     }
 }
