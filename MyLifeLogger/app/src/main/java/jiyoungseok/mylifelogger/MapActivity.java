@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -52,7 +53,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         dbManager.showMarker(myLoggerList);
-        LatLng openMap = new LatLng(37.611013, 126.994625);
+        LatLng openMap = new LatLng(37.601876, 127.040742);
 
         for (int i = 0; i < myLoggerList.size(); i++) {
             MarkerOptions marker = new MarkerOptions();
@@ -73,7 +74,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         }
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(openMap, 13));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(openMap, 12));
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -97,6 +98,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                             public void onClick (DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
+                        })
+                        .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick (DialogInterface dialog, int which) {
+                                dbManager.delete(myLoggerList.get(tmp).getLatitude());
+                                Toast.makeText(MapActivity.this, "정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
+                                startActivity(moveToMap);
+                            }
                         });
 
                     AlertDialog alertDialog = builder.create();
@@ -117,6 +127,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                                 @Override
                                 public void onClick (DialogInterface dialog, int which) {
                                     dialog.cancel();
+                                }
+                            })
+                            .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick (DialogInterface dialog, int which) {
+                                    dbManager.delete(myLoggerList.get(tmp).getLatitude());
+                                    Toast.makeText(MapActivity.this, "정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                    Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
+                                    startActivity(moveToMap);
                                 }
                             });
 

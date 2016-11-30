@@ -27,13 +27,19 @@ public class DBManager  extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         Log.d("SQL", "Type : " + type + "Date : " + date + " Time : " + time + " Latitude : " + latitude + " Longitude : " + longitude + " Event : " + event + " Memo : " + memo);
         db.execSQL("INSERT INTO database VALUES (NULL, " + type + ", " + date + ", " + time + ", " + latitude + ", " + longitude + ", '" + event + "', '" + memo + "');");
+        db.close();
+    }
+
+    public void delete (Double latitude) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM database WHERE latitude = " + latitude);
+        db.close();
     }
 
     public int getTime(int getDate, String getEvent) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM database", null);
+        Cursor cursor = db.rawQuery("SELECT date, time, event FROM database", null);
 
-        Log.d("SQL", "Date : " + getDate + "Event : " + getEvent);
         int todayTotalTime = 0;
 
         while (cursor.moveToNext()) {
