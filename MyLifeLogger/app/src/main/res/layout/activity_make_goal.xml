@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:textStyle="bold"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:text="목표설정 하기"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
@@ -116,7 +116,10 @@
             android:layout_weight="1"
             android:textColor="#787878"
             android:gravity="center"
-            android:layout_marginRight="20dp"/>
+            android:entries="@array/항목"
+            android:id="@+id/spinner"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="50dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -144,12 +147,29 @@
             android:textStyle="bold"
             android:textColor="#787878"
             android:gravity="center"
-            android:id="@+id/editText_GoalTime"/>
+            android:id="@+id/editText_GoalTime"
+            android:layout_marginLeft="20dp"/>
 
-        <RadioButton
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.6"
-            android:layout_marginRight="20dp"/>
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="이상" />
+
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="이하"/>
+        </RadioGroup>
     </LinearLayout>
 </LinearLayout>

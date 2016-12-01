@@ -103,7 +103,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick (DialogInterface dialog, int which) {
-                                dbManager.delete(myLoggerList.get(tmp).getLatitude());
+                                dbManager.delete(myLoggerList.get(tmp).getLatitude(), myLoggerList.get(tmp).getLongitude());
                                 Toast.makeText(MapActivity.this, "정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                 Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
                                 finish();
@@ -135,7 +135,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                             .setNegativeButton("삭제", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick (DialogInterface dialog, int which) {
-                                    dbManager.delete(myLoggerList.get(tmp).getLatitude());
+                                    dbManager.delete(myLoggerList.get(tmp).getLatitude(), myLoggerList.get(tmp).getLongitude());
                                     Toast.makeText(MapActivity.this, "정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                     Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
                                     startActivity(moveToMap);

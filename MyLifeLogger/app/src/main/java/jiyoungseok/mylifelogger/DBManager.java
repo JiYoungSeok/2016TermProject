@@ -30,9 +30,9 @@ public class DBManager  extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void delete (Double latitude) {
+    public void delete (Double latitude, Double longitude) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM database WHERE latitude = " + latitude);
+        db.execSQL("DELETE FROM database WHERE latitude = " + latitude + " AND longitude = " + longitude);
         db.close();
     }
 
