@@ -3,21 +3,19 @@ package jiyoungseok.mylifelogger;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
-import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class LogActivity extends AppCompatActivity {
 
@@ -52,7 +50,7 @@ public class LogActivity extends AppCompatActivity {
         iYear = today.get(Calendar.YEAR);
         iMonth = today.get(Calendar.MONTH) + 1;
         iDate = today.get(Calendar.DAY_OF_MONTH);
-        iHour = today.get(Calendar.HOUR_OF_DAY) + 9;
+        iHour = today.get(Calendar.HOUR_OF_DAY);
         iMinute = today.get(Calendar.MINUTE);
 
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);

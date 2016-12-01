@@ -47,14 +47,16 @@
             android:textSize="20sp"
             android:text="2016년 11월 31일"
             android:textColor="#787878"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:id="@+id/textView_StartDay"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/calendar"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:onClick="onClickStartCalendar"/>
     </LinearLayout>
 
     <LinearLayout
@@ -82,14 +84,16 @@
             android:textSize="20sp"
             android:text="2016년 11월 31일"
             android:textColor="#787878"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:id="@+id/textView_EndDay"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/calendar"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:onClick="onClickEndCalendar"/>
     </LinearLayout>
 
 
