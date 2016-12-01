@@ -58,9 +58,6 @@ public class LogActivity extends AppCompatActivity {
         textViewLatitude = (TextView) findViewById(R.id.textView_Latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_Longitude);
 
-        if (iHour > 24) {
-           iHour = iHour - 24;
-        }
         textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
         textViewCurrentTime.setText("현재시간 : " + iHour + "시 " + iMinute + "분");
 

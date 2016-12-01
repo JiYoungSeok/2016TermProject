@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -19,9 +21,12 @@ public class MakeGoalActivity extends AppCompatActivity {
     TextView textViewStartDay, textViewEndDay;
     EditText editTextGoalTime;
     Spinner spinner;
+    RadioButton radioButtonUp, radioButtonDown;
 
     String category;
 
+    final String IS_CHECKED_UP = "이상";
+    final String IS_CHECKED_DOWN = "이하";
     final int SECONDS_PER_MINUTE = 60;
     final int SECONDS_PER_HOUR = 3600;
     final int YEAR_TO_CONVERTDATE = 10000;
@@ -29,9 +34,11 @@ public class MakeGoalActivity extends AppCompatActivity {
 
     private int convertStartDate;
     private int convertEndDate;
-
     private int startYear, startMonth, startDate;
     private int endYear, endMonth, endDate;
+    private boolean isCheckUp = false;
+    private boolean isCheckDown = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +64,39 @@ public class MakeGoalActivity extends AppCompatActivity {
         startMonth = startMonth - 1;
         endMonth = endMonth - 1;
 
-        editTextGoalTime = (EditText) findViewById (R.id.editText_GoalTime);
         spinner = (Spinner) findViewById (R.id.spinner);
+        editTextGoalTime = (EditText) findViewById (R.id.editText_GoalTime);
+        editTextGoalTime.setHint("시간을 입력하세요");
+
+        radioButtonUp = (RadioButton) findViewById (R.id.radioButton_Up);
+        radioButtonDown = (RadioButton) findViewById (R.id.radioButton_Down);
+
+
+        RadioButton.OnClickListener optionOnClickListener = new RadioButton.OnClickListener() {
+            public void onClick(View view) {
+                if (radioButtonUp.isChecked()) {
+                    isCheckUp = true;
+                    Toast.makeText(MakeGoalActivity.this, "이상", Toast.LENGTH_SHORT).show();
+                } else {
+                    isCheckDown = true;
+                    Toast.makeText(MakeGoalActivity.this, "이하", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        radioButtonUp.setOnClickListener(optionOnClickListener);
+        radioButtonDown.setOnClickListener(optionOnClickListener);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 category = parent.getItemAtPosition(position).toString();
                 ((TextView)parent.getChildAt(0)).setTextColor(Color.BLACK);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        editTextGoalTime.setHint("시간을 입력하세요");
     }
 
     public void onClickStartCalendar(View view) {
