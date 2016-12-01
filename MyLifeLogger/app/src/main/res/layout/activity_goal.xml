@@ -108,7 +108,8 @@
                 android:text="목표설정"
                 android:gravity="center"
                 android:id="@+id/button_MakeGoal"
-                android:background="#56B37F"/>
+                android:background="#56B37F"
+                android:onClick="onClickChangePage"/>
         </LinearLayout>
     </LinearLayout>
 

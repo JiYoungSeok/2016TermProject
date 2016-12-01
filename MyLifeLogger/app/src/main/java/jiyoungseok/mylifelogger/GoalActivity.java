@@ -36,6 +36,11 @@ public class GoalActivity extends AppCompatActivity {
                 startActivity(moveToGoal);
                 finish();
                 break;
+            case R.id.button_MakeGoal:
+                Intent moveToMakeGoal = new Intent (getApplicationContext(), MakeGoalActivity.class);
+                startActivity(moveToMakeGoal);
+                finish();
+                break;
         }
     }
 

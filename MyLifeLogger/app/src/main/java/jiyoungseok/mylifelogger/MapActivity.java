@@ -86,10 +86,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                 if (myLoggerList.get(tmp).getType() == 1) {
                     builder
-                        .setTitle("정보")
+                        .setTitle("상세정보")
                         .setCancelable(false)
                         .setMessage(
-                                "날짜 : " + (myLoggerList.get(tmp).getDate() / YEAR_TO_CONVERTDATE) + "년 " + ((myLoggerList.get(tmp).getDate() % YEAR_TO_CONVERTDATE) / MONTH_TO_CONVERTDATE) + "월 " + (myLoggerList.get(tmp).getDate() % MONTH_TO_CONVERTDATE) + "일" +
+                                "분류 : Task" +
+                                "\n날짜 : " + (myLoggerList.get(tmp).getDate() / YEAR_TO_CONVERTDATE) + "년 " + ((myLoggerList.get(tmp).getDate() % YEAR_TO_CONVERTDATE) / MONTH_TO_CONVERTDATE) + "월 " + (myLoggerList.get(tmp).getDate() % MONTH_TO_CONVERTDATE) + "일" +
                                 "\n시간 : " + myLoggerList.get(tmp).getTime() / SECONDS_PER_MINUTE + "분 " + myLoggerList.get(tmp).getTime() % SECONDS_PER_MINUTE + "초" +
                                 "\n한일 : " + myLoggerList.get(tmp).getEvent())
                         .setView(popUpWindow)
@@ -116,10 +117,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                 } else {
                     builder
-                            .setTitle("정보")
+                            .setTitle("상세정보")
                             .setCancelable(false)
                             .setMessage(
-                                    "날짜 : " + (myLoggerList.get(tmp).getDate() / YEAR_TO_CONVERTDATE) + "년 " + ((myLoggerList.get(tmp).getDate() % YEAR_TO_CONVERTDATE) / MONTH_TO_CONVERTDATE) + "월 " + (myLoggerList.get(tmp).getDate() % MONTH_TO_CONVERTDATE) + "일" +
+                                    "분류 : Log" +
+                                    "\n날짜 : " + (myLoggerList.get(tmp).getDate() / YEAR_TO_CONVERTDATE) + "년 " + ((myLoggerList.get(tmp).getDate() % YEAR_TO_CONVERTDATE) / MONTH_TO_CONVERTDATE) + "월 " + (myLoggerList.get(tmp).getDate() % MONTH_TO_CONVERTDATE) + "일" +
                                     "\n시간 : " + myLoggerList.get(tmp).getTime() / SECONDS_PER_HOUR + "시 " + (myLoggerList.get(tmp).getTime() % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE + "분" +
                                     "\n내용 : " + myLoggerList.get(tmp).getEvent() +
                                     "\n메모 : " + myLoggerList.get(tmp).getMemo())
