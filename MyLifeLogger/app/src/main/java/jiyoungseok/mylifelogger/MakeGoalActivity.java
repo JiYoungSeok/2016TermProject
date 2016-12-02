@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MakeGoalActivity extends AppCompatActivity {
@@ -22,8 +24,10 @@ public class MakeGoalActivity extends AppCompatActivity {
     EditText editTextGoalTime;
     Spinner spinner;
     RadioButton radioButtonUp, radioButtonDown;
-
+    ListView listViewGoal;
     String category;
+
+    ArrayList<GoalList> al_GoalList = new ArrayList<>();
 
     final String IS_CHECKED_UP = "이상";
     final String IS_CHECKED_DOWN = "이하";
@@ -39,6 +43,7 @@ public class MakeGoalActivity extends AppCompatActivity {
     private boolean isCheckUp = false;
     private boolean isCheckDown = false;
 
+    ListViewAdapter listViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,7 @@ public class MakeGoalActivity extends AppCompatActivity {
         radioButtonUp = (RadioButton) findViewById (R.id.radioButton_Up);
         radioButtonDown = (RadioButton) findViewById (R.id.radioButton_Down);
 
+        listViewGoal = (ListView) findViewById(R.id.listView_Goal);
 
         RadioButton.OnClickListener optionOnClickListener = new RadioButton.OnClickListener() {
             public void onClick(View view) {
@@ -96,6 +102,10 @@ public class MakeGoalActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+
+
+        listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, al_GoalList, R.layout.goal_row);
+        listViewGoal.setAdapter(listViewAdapter);
 
     }
 
