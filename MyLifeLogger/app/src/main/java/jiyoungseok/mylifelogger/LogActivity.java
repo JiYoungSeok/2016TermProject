@@ -29,11 +29,11 @@ public class LogActivity extends AppCompatActivity {
     LocationManager manager;
     DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
 
-    final int TYPE_LOG_ACTIVITY = 2;
-    final int SECONDS_PER_MINUTE = 60;
-    final int SECONDS_PER_HOUR = 3600;
-    final int YEAR_TO_CONVERTDATE = 10000;
-    final int MONTH_TO_CONVERTDATE = 100;
+    static final int TYPE_LOG_ACTIVITY = 2;
+    static final int SECONDS_PER_MINUTE = 60;
+    static final int SECONDS_PER_HOUR = 3600;
+    static final int YEAR_TO_CONVERTDATE = 10000;
+    static final int MONTH_TO_CONVERTDATE = 100;
 
     private int convertDate, convertTime;
     private int iYear, iMonth, iDate, iHour, iMinute;
@@ -144,25 +144,26 @@ public class LogActivity extends AppCompatActivity {
     };
 
     public void onClickChangePage(View view) {
+        Intent intent;
         switch(view.getId()) {
             case R.id.button_Task:
-                Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
-                startActivity(moveToTask);
+                intent = new Intent (getApplicationContext(), TaskActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Log:
-                Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
-                startActivity(moveToLog);
+                intent = new Intent (getApplicationContext(), LogActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Map:
-                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
-                startActivity(moveToMap);
+                intent = new Intent (getApplicationContext(), MapActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Goal:
-                Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
-                startActivity(moveToGoal);
+                intent = new Intent (getApplicationContext(), GoalActivity.class);
+                startActivity(intent);
                 finish();
                 break;
         }

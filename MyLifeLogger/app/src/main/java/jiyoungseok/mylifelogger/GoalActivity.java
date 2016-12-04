@@ -15,30 +15,31 @@ public class GoalActivity extends AppCompatActivity {
     }
 
     public void onClickChangePage(View view) {
+        Intent intent;
         switch(view.getId()) {
             case R.id.button_Task:
-                Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
-                startActivity(moveToTask);
+                intent = new Intent (getApplicationContext(), TaskActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Log:
-                Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
-                startActivity(moveToLog);
+                intent = new Intent (getApplicationContext(), LogActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Map:
-                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
-                startActivity(moveToMap);
+                intent = new Intent (getApplicationContext(), MapActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Goal:
-                Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
-                startActivity(moveToGoal);
+                intent = new Intent (getApplicationContext(), GoalActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_MakeGoal:
-                Intent moveToMakeGoal = new Intent (getApplicationContext(), MakeGoalActivity.class);
-                startActivity(moveToMakeGoal);
+                intent = new Intent (getApplicationContext(), MakeGoalActivity.class);
+                startActivity(intent);
                 finish();
                 break;
         }

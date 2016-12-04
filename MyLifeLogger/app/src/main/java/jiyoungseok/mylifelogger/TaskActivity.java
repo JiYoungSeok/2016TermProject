@@ -40,11 +40,11 @@ public class TaskActivity extends AppCompatActivity {
     DBManager dbManager = new DBManager(this, "myLifeLogger.db", null, 1);
     LocationManager manager;
 
-    final int TYPE_TASK_ACTIVITY = 1;
-    final int SECONDS_PER_MINUTE = 60;
-    final int SECONDS_PER_HOUR = 3600;
-    final int YEAR_TO_CONVERTDATE = 10000;
-    final int MONTH_TO_CONVERTDATE = 100;
+    static final int TYPE_TASK_ACTIVITY = 1;
+    static final int SECONDS_PER_MINUTE = 60;
+    static final int SECONDS_PER_HOUR = 3600;
+    static final int YEAR_TO_CONVERTDATE = 10000;
+    static final int MONTH_TO_CONVERTDATE = 100;
 
     private int currentTime;
     private int currentTimeToSeconds;
@@ -78,7 +78,7 @@ public class TaskActivity extends AppCompatActivity {
         Calendar today;
         today = Calendar.getInstance();
         iYear = today.get(Calendar.YEAR);
-        iMonth = today.get(Calendar.MONTH) + 1;
+        iMonth = today.get(Calendar.MONTH);
         iDate = today.get(Calendar.DAY_OF_MONTH);
 
         buttonStart = (Button) findViewById(R.id.button_Start);
@@ -88,10 +88,9 @@ public class TaskActivity extends AppCompatActivity {
 
         textViewWhatToDo = (TextView) findViewById(R.id.textView_WhatToDo);
         textViewTodayDate = (TextView) findViewById(R.id.textView_TodayDate);
-        textViewTodayDate.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
+        textViewTodayDate.setText(iYear + "년 " + (iMonth+1) + "월 " + iDate + "일");
 
-        convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
-        iMonth = iMonth - 1;
+        convertDate = iYear * YEAR_TO_CONVERTDATE + (iMonth+1) * MONTH_TO_CONVERTDATE + iDate;
 
         setText();
 
@@ -139,8 +138,14 @@ public class TaskActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,2) + chronometer.getText().toString().substring(3));
-                currentTimeToSeconds = ((currentTime / 100) * SECONDS_PER_MINUTE) + (currentTime % 100);
+
+                if(chronometer.getText().toString().length() == 5) {
+                    currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,2) + chronometer.getText().toString().substring(3));
+                    currentTimeToSeconds = ((currentTime / 100) * SECONDS_PER_MINUTE) + (currentTime % 100);
+                } else if(chronometer.getText().toString().length() == 7) {
+                    currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,1) + chronometer.getText().toString().substring(2,4) + chronometer.toString().substring(5));
+                    currentTimeToSeconds = (((currentTime / 10000)) * SECONDS_PER_HOUR) + ((currentTime % 10000) / 100) * SECONDS_PER_MINUTE + (currentTime % 100);
+                }
 
                 if (isTimerRun == false) {
                     chronometer.setBase(SystemClock.elapsedRealtime());
@@ -379,25 +384,26 @@ public class TaskActivity extends AppCompatActivity {
     };
 
     public void onClickChangePage(View view) {
+        Intent intent;
         switch(view.getId()) {
             case R.id.button_Task:
-                Intent moveToTask = new Intent (getApplicationContext(), TaskActivity.class);
-                startActivity(moveToTask);
+                intent = new Intent (getApplicationContext(), TaskActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Log:
-                Intent moveToLog = new Intent (getApplicationContext(), LogActivity.class);
-                startActivity(moveToLog);
+                intent = new Intent (getApplicationContext(), LogActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Map:
-                Intent moveToMap = new Intent (getApplicationContext(), MapActivity.class);
-                startActivity(moveToMap);
+                intent = new Intent (getApplicationContext(), MapActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.button_Goal:
-                Intent moveToGoal = new Intent (getApplicationContext(), GoalActivity.class);
-                startActivity(moveToGoal);
+                intent = new Intent (getApplicationContext(), GoalActivity.class);
+                startActivity(intent);
                 finish();
                 break;
         }

@@ -32,20 +32,16 @@ public class MakeGoalActivity extends AppCompatActivity {
 
     ArrayList<GoalList> myGoalList = new ArrayList<>();
 
-    final String IS_CHECKED_UP = "이상";
-    final String IS_CHECKED_DOWN = "이하";
-    final int SECONDS_PER_MINUTE = 60;
-    final int SECONDS_PER_HOUR = 3600;
-    final int YEAR_TO_CONVERTDATE = 10000;
-    final int MONTH_TO_CONVERTDATE = 100;
+    static final String IS_CHECKED_UP = "이상";
+    static final String IS_CHECKED_DOWN = "이하";
+    static final int YEAR_TO_CONVERTDATE = 10000;
+    static final int MONTH_TO_CONVERTDATE = 100;
 
     private int convertStartDate;
     private int convertEndDate;
     private int startYear, startMonth, startDate;
     private int endYear, endMonth, endDate;
     private int isCheckUpOrDown;
-    private boolean isCheckUp = false;
-    private boolean isCheckDown = false;
 
     ListViewAdapter listViewAdapter;
 
@@ -57,21 +53,16 @@ public class MakeGoalActivity extends AppCompatActivity {
         Calendar today;
         today = Calendar.getInstance();
         startYear = today.get(Calendar.YEAR);
-        startMonth = today.get(Calendar.MONTH) + 1;
+        startMonth = today.get(Calendar.MONTH);
         startDate = today.get(Calendar.DAY_OF_MONTH);
         endYear = today.get(Calendar.YEAR);
-        endMonth = today.get(Calendar.MONTH) + 1;
+        endMonth = today.get(Calendar.MONTH);
         endDate = today.get(Calendar.DAY_OF_MONTH);
 
         textViewStartDay = (TextView) findViewById(R.id.textView_StartDay);
         textViewEndDay = (TextView) findViewById(R.id.textView_EndDay);
-        textViewStartDay.setText(startYear + "년 " + startMonth + "월 " + startDate + "일");
-        textViewEndDay.setText(endYear + "년 " + endMonth + "월 " + endDate + "일");
-
-        convertStartDate = startYear * YEAR_TO_CONVERTDATE + startMonth * MONTH_TO_CONVERTDATE + startDate;
-        convertEndDate = endYear * YEAR_TO_CONVERTDATE + endMonth * MONTH_TO_CONVERTDATE + endDate;
-        startMonth = startMonth - 1;
-        endMonth = endMonth - 1;
+        textViewStartDay.setText(startYear + "년 " + (startMonth+1) + "월 " + startDate + "일");
+        textViewEndDay.setText(endYear + "년 " + (endMonth+1) + "월 " + endDate + "일");
 
         spinner = (Spinner) findViewById (R.id.spinner);
         editTextGoalTime = (EditText) findViewById (R.id.editText_GoalTime);
@@ -105,9 +96,7 @@ public class MakeGoalActivity extends AppCompatActivity {
         radioButtonUp.setOnClickListener(optionOnClickListener);
         radioButtonDown.setOnClickListener(optionOnClickListener);
 
-        dbManager.showList(myGoalList);
-        listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
-        listViewGoal.setAdapter(listViewAdapter);
+        showListView();
 
         buttonSaveGoal.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -117,23 +106,12 @@ public class MakeGoalActivity extends AppCompatActivity {
                 convertEndDate = endYear * YEAR_TO_CONVERTDATE + (endMonth+1) * MONTH_TO_CONVERTDATE + endDate;
 
                 if (isCheckUpOrDown == 1) {
-
                     dbManager.insert(convertStartDate, convertEndDate, Integer.parseInt(editTextGoalTime.getText().toString()), category, IS_CHECKED_UP);
-                    listViewGoal.setAdapter(listViewAdapter);
-                    myGoalList.clear();
-                    dbManager.showList(myGoalList);
-                    listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
-                    listViewGoal.setAdapter(listViewAdapter);
+                    showListView();
 
                 } else if (isCheckUpOrDown == 2) {
-
                     dbManager.insert(convertStartDate, convertEndDate, Integer.parseInt(editTextGoalTime.getText().toString()), category, IS_CHECKED_DOWN);
-                    listViewGoal.setAdapter(listViewAdapter);
-                    myGoalList.clear();
-                    dbManager.showList(myGoalList);
-                    listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
-                    listViewGoal.setAdapter(listViewAdapter);
-
+                    showListView();
                 }
             }
         });
@@ -172,6 +150,14 @@ public class MakeGoalActivity extends AppCompatActivity {
             }
         };
         new DatePickerDialog(MakeGoalActivity.this, dateSetListener, endYear, endMonth, endDate).show();
+    }
+
+    public void showListView () {
+        myGoalList.clear();
+        dbManager.showList(myGoalList);
+        listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
+        listViewGoal.setAdapter(listViewAdapter);
+
     }
 
     public void onBackPressed() {
