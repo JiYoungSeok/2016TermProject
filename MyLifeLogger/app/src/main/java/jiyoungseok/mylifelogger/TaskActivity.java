@@ -165,7 +165,7 @@ public class TaskActivity extends AppCompatActivity {
                             setText();
                             break;
                         case 5:
-                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "운동", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "데이트", "");
                             setText();
                             break;
                         case 6:
@@ -173,7 +173,7 @@ public class TaskActivity extends AppCompatActivity {
                             setText();
                             break;
                         case 7:
-                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "이동", "");
+                            dbManager.insert(TYPE_TASK_ACTIVITY, convertDate, currentTimeToSeconds, latitude, longitude, "기타", "");
                             setText();
                             break;
                     }
