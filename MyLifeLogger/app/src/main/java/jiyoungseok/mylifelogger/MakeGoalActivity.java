@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -114,19 +113,27 @@ public class MakeGoalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                convertStartDate = startYear * YEAR_TO_CONVERTDATE + startMonth * MONTH_TO_CONVERTDATE + startDate;
-                convertEndDate = endYear * YEAR_TO_CONVERTDATE + endMonth * MONTH_TO_CONVERTDATE + endDate;
+                convertStartDate = startYear * YEAR_TO_CONVERTDATE + (startMonth+1) * MONTH_TO_CONVERTDATE + startDate;
+                convertEndDate = endYear * YEAR_TO_CONVERTDATE + (endMonth+1) * MONTH_TO_CONVERTDATE + endDate;
 
                 if (isCheckUpOrDown == 1) {
+
                     dbManager.insert(convertStartDate, convertEndDate, Integer.parseInt(editTextGoalTime.getText().toString()), category, IS_CHECKED_UP);
+                    listViewGoal.setAdapter(listViewAdapter);
+                    myGoalList.clear();
                     dbManager.showList(myGoalList);
                     listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
                     listViewGoal.setAdapter(listViewAdapter);
+
                 } else if (isCheckUpOrDown == 2) {
+
                     dbManager.insert(convertStartDate, convertEndDate, Integer.parseInt(editTextGoalTime.getText().toString()), category, IS_CHECKED_DOWN);
+                    listViewGoal.setAdapter(listViewAdapter);
+                    myGoalList.clear();
                     dbManager.showList(myGoalList);
                     listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
                     listViewGoal.setAdapter(listViewAdapter);
+
                 }
             }
         });
@@ -145,8 +152,6 @@ public class MakeGoalActivity extends AppCompatActivity {
                 startYear = year;
                 startMonth = monthOfYear - 1;
                 startDate = dayOfMonth;
-
-                convertStartDate = startYear * YEAR_TO_CONVERTDATE + startMonth * MONTH_TO_CONVERTDATE + startDate;
             }
         };
         new DatePickerDialog(MakeGoalActivity.this, dateSetListener, startYear, startMonth, startDate).show();
@@ -164,8 +169,6 @@ public class MakeGoalActivity extends AppCompatActivity {
                 endYear = year;
                 endMonth = monthOfYear - 1;
                 endDate = dayOfMonth;
-
-                convertEndDate = endYear * YEAR_TO_CONVERTDATE + endMonth * MONTH_TO_CONVERTDATE + endDate;
             }
         };
         new DatePickerDialog(MakeGoalActivity.this, dateSetListener, endYear, endMonth, endDate).show();

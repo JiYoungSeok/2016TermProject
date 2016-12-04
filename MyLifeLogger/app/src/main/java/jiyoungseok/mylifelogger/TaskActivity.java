@@ -197,7 +197,7 @@ public class TaskActivity extends AppCompatActivity {
                 iMonth = monthOfYear - 1;
                 iDate = dayOfMonth;
 
-                convertDate = iYear * YEAR_TO_CONVERTDATE + iMonth * MONTH_TO_CONVERTDATE + iDate;
+                convertDate = iYear * YEAR_TO_CONVERTDATE + (iMonth+1) * MONTH_TO_CONVERTDATE + iDate;
                 setText();
             }
         };
