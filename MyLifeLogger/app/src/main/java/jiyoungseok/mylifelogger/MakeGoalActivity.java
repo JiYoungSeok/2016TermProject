@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,10 +25,13 @@ public class MakeGoalActivity extends AppCompatActivity {
     EditText editTextGoalTime;
     Spinner spinner;
     RadioButton radioButtonUp, radioButtonDown;
+    Button buttonSaveGoal;
     ListView listViewGoal;
     String category;
 
-    ArrayList<GoalList> al_GoalList = new ArrayList<>();
+    DBManagerGoal dbManager = new DBManagerGoal(this, "myGoal.db", null, 1);
+
+    ArrayList<GoalList> myGoalList = new ArrayList<>();
 
     final String IS_CHECKED_UP = "이상";
     final String IS_CHECKED_DOWN = "이하";
@@ -40,6 +44,7 @@ public class MakeGoalActivity extends AppCompatActivity {
     private int convertEndDate;
     private int startYear, startMonth, startDate;
     private int endYear, endMonth, endDate;
+    private int isCheckUpOrDown;
     private boolean isCheckUp = false;
     private boolean isCheckDown = false;
 
@@ -75,23 +80,8 @@ public class MakeGoalActivity extends AppCompatActivity {
 
         radioButtonUp = (RadioButton) findViewById (R.id.radioButton_Up);
         radioButtonDown = (RadioButton) findViewById (R.id.radioButton_Down);
-
+        buttonSaveGoal = (Button) findViewById (R.id.button_SaveGoal);
         listViewGoal = (ListView) findViewById(R.id.listView_Goal);
-
-        RadioButton.OnClickListener optionOnClickListener = new RadioButton.OnClickListener() {
-            public void onClick(View view) {
-                if (radioButtonUp.isChecked()) {
-                    isCheckUp = true;
-                    Toast.makeText(MakeGoalActivity.this, "이상", Toast.LENGTH_SHORT).show();
-                } else {
-                    isCheckDown = true;
-                    Toast.makeText(MakeGoalActivity.this, "이하", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
-        radioButtonUp.setOnClickListener(optionOnClickListener);
-        radioButtonDown.setOnClickListener(optionOnClickListener);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,9 +93,43 @@ public class MakeGoalActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        RadioButton.OnClickListener optionOnClickListener = new RadioButton.OnClickListener() {
+            public void onClick(View view) {
+                if (radioButtonUp.isChecked()) {
+                    isCheckUpOrDown = 1;
+                } else {
+                    isCheckUpOrDown = 2;
+                }
+            }
+        };
 
-        listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, al_GoalList, R.layout.goal_row);
+        radioButtonUp.setOnClickListener(optionOnClickListener);
+        radioButtonDown.setOnClickListener(optionOnClickListener);
+
+        dbManager.showList(myGoalList);
+        listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
         listViewGoal.setAdapter(listViewAdapter);
+
+        buttonSaveGoal.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                convertStartDate = startYear * YEAR_TO_CONVERTDATE + startMonth * MONTH_TO_CONVERTDATE + startDate;
+                convertEndDate = endYear * YEAR_TO_CONVERTDATE + endMonth * MONTH_TO_CONVERTDATE + endDate;
+
+                if (isCheckUpOrDown == 1) {
+                    dbManager.insert(convertStartDate, convertEndDate, Integer.parseInt(editTextGoalTime.getText().toString()), category, IS_CHECKED_UP);
+                    dbManager.showList(myGoalList);
+                    listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
+                    listViewGoal.setAdapter(listViewAdapter);
+                } else if (isCheckUpOrDown == 2) {
+                    dbManager.insert(convertStartDate, convertEndDate, Integer.parseInt(editTextGoalTime.getText().toString()), category, IS_CHECKED_DOWN);
+                    dbManager.showList(myGoalList);
+                    listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
+                    listViewGoal.setAdapter(listViewAdapter);
+                }
+            }
+        });
 
     }
 

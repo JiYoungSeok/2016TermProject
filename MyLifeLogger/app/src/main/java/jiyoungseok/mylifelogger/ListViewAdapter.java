@@ -51,7 +51,7 @@ public class ListViewAdapter extends BaseAdapter{
         String startDate = Integer.toString(goalList.getStartDate());
         String endDate = Integer.toString(goalList.getEndDate());
 
-        tv1.setText(startDate.substring(0,4) + "년 " + startDate.substring(4,6) + "월 " + startDate.substring(6) + "일 ~ " + endDate.substring(0, 4) + "년 " + endDate.substring(4,6) + "월 " + endDate.substring(6) + "일");
+        tv1.setText(startDate.substring(0,4) + "년 " + startDate.substring(4,6) + "월 " + startDate.substring(6) + "일 ~ " + endDate.substring(0,4) + "년 " + endDate.substring(4,6) + "월 " + endDate.substring(6) + "일");
         tv2.setText(goalList.getCategory());
         tv3.setText(goalList.getTime() + "시간 " + goalList.getUpOrDown());
 
