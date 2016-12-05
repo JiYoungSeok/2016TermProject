@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -77,6 +78,10 @@ public class MakeGoalActivity extends AppCompatActivity {
         radioButtonDown = (RadioButton) findViewById (R.id.radioButton_Down);
         buttonSaveGoal = (Button) findViewById (R.id.button_SaveGoal);
         listViewGoal = (ListView) findViewById(R.id.listView_Goal);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.parseColor("#5D5D5D"));
+        }
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

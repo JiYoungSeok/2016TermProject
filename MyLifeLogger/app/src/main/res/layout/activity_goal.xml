@@ -19,8 +19,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Task"
+            android:textColor="#000000"
             android:id="@+id/button_Task"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/stopwatch"
             android:onClick="onClickChangePage"/>
 
@@ -31,8 +32,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Log"
+            android:textColor="#000000"
             android:id="@+id/button_Log"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/edit"
             android:onClick="onClickChangePage"/>
 
@@ -43,8 +45,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Map"
+            android:textColor="#000000"
             android:id="@+id/button_Map"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/placeholder"
             android:onClick="onClickChangePage"/>
 
@@ -55,9 +58,10 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Goal"
+            android:textColor="#000000"
             android:id="@+id/button_Goal"
             android:drawableTop="@drawable/goal"
-            android:background="#82F9B7"
+            android:background="#FFFFFF"
             android:onClick="onClickChangePage"/>
     </LinearLayout>
 

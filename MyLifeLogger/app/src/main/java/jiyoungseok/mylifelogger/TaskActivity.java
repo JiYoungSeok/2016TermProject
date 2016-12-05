@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -95,6 +96,10 @@ public class TaskActivity extends AppCompatActivity {
         setText();
 
         chronometer = (Chronometer) findViewById(R.id.chronometer);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.parseColor("#5D5D5D"));
+        }
 
         buttonStart.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -224,7 +229,7 @@ public class TaskActivity extends AppCompatActivity {
                 if(isTimerRun == false) {
                     textViewWhatToDo.setText("공부");
 
-                    startStudy.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startStudy.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -243,7 +248,7 @@ public class TaskActivity extends AppCompatActivity {
                     textViewWhatToDo.setText("직장");
 
                     startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startWork.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startWork.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -262,7 +267,7 @@ public class TaskActivity extends AppCompatActivity {
 
                     startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startHobby.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startHobby.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -281,7 +286,7 @@ public class TaskActivity extends AppCompatActivity {
                     startStudy.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startWorkout.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startWorkout.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
@@ -300,7 +305,7 @@ public class TaskActivity extends AppCompatActivity {
                     startWork.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startDate.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startDate.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
 
@@ -319,7 +324,7 @@ public class TaskActivity extends AppCompatActivity {
                     startHobby.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startMove.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startMove.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     startOther.setBackgroundColor(Color.parseColor("#F0FFF0"));
 
                     switchWhatToDo = 6;
@@ -338,7 +343,7 @@ public class TaskActivity extends AppCompatActivity {
                     startWorkout.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startDate.setBackgroundColor(Color.parseColor("#F0FFF0"));
                     startMove.setBackgroundColor(Color.parseColor("#F0FFF0"));
-                    startOther.setBackgroundColor(Color.parseColor("#61F3EB"));
+                    startOther.setBackgroundColor(Color.parseColor("#B2CCFF"));
 
                     switchWhatToDo = 7;
                     break;

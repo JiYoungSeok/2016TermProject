@@ -19,8 +19,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Task"
+            android:textColor="#000000"
             android:id="@+id/button_Task"
-            android:background="#82F9B7"
+            android:background="#FFFFFF"
             android:drawableTop="@drawable/stopwatch"
             android:onClick="onClickChangePage"/>
 
@@ -31,8 +32,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Log"
+            android:textColor="#000000"
             android:id="@+id/button_Log"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/edit"
             android:onClick="onClickChangePage"/>
 
@@ -43,8 +45,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Map"
+            android:textColor="#000000"
             android:id="@+id/button_Map"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/placeholder"
             android:onClick="onClickChangePage"/>
 
@@ -55,8 +58,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Goal"
+            android:textColor="#000000"
             android:id="@+id/button_Goal"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/goal"
             android:onClick="onClickChangePage"/>
     </LinearLayout>
@@ -65,13 +69,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#82F9B7">
+        android:background="#FFFFFF">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:orientation="horizontal"
-            android:background="#82F9B7">
+            android:background="#FFFFFF">
 
             <TextView
                 android:layout_width="match_parent"
@@ -105,9 +109,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
-                android:text="할 일을 선택하세요"
+                android:text="할 일을 선택하세요."
                 android:id="@+id/textView_WhatToDo"
                 android:gravity="center"/>
 
@@ -116,7 +120,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:textStyle="bold"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#787878"
                 android:gravity="center"
                 android:id="@+id/chronometer"/>
@@ -137,7 +141,7 @@
                 android:text="시작"
                 android:id="@+id/button_Start"
                 android:onClick="onClickTimer"
-                android:background="#82F9B7"/>
+                android:background="#FFFFFF"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -149,7 +153,7 @@
                 android:text="정지"
                 android:id="@+id/button_Stop"
                 android:onClick="onClickTimer"
-                android:background="#82F9B7"/>
+                android:background="#FFFFFF"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -161,7 +165,7 @@
                 android:text="리셋"
                 android:id="@+id/button_Reset"
                 android:onClick="onClickTimer"
-                android:background="#82F9B7"/>
+                android:background="#FFFFFF"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -178,7 +182,7 @@
             android:textSize="20sp"
             android:text="저장"
             android:id="@+id/button_Save"
-            android:background="#56B37F"/>
+            android:background="#6799FF"/>
 
     </LinearLayout>
 

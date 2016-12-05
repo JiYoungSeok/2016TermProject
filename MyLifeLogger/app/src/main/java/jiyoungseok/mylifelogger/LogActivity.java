@@ -3,9 +3,11 @@ package jiyoungseok.mylifelogger;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,6 +69,10 @@ public class LogActivity extends AppCompatActivity {
         buttonCheckLocation = (Button) findViewById(R.id.button_CheckLocation);
         buttonGetImage = (Button) findViewById(R.id.button_GetImage);
         buttonSaveLocation = (Button) findViewById(R.id.button_SaveLocation);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.parseColor("#5D5D5D"));
+        }
 
         buttonCheckLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick (View v) {

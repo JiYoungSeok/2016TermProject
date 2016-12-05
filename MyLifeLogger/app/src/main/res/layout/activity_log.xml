@@ -19,8 +19,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Task"
+            android:textColor="#000000"
             android:id="@+id/button_Task"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/stopwatch"
             android:onClick="onClickChangePage"/>
 
@@ -31,8 +32,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Log"
+            android:textColor="#000000"
             android:id="@+id/button_Log"
-            android:background="#82F9B7"
+            android:background="#FFFFFF"
             android:drawableTop="@drawable/edit"
             android:onClick="onClickChangePage"/>
 
@@ -43,8 +45,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Map"
+            android:textColor="#000000"
             android:id="@+id/button_Map"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/placeholder"
             android:onClick="onClickChangePage"/>
 
@@ -55,8 +58,9 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Goal"
+            android:textColor="#000000"
             android:id="@+id/button_Goal"
-            android:background="#56B37F"
+            android:background="#8C8C8C"
             android:drawableTop="@drawable/goal"
             android:onClick="onClickChangePage"/>
     </LinearLayout>
@@ -65,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#82F9B7">
+        android:background="#FFFFFF">
 
         <TextView
             android:layout_width="match_parent"
@@ -105,7 +109,7 @@
             android:text="위치확인"
             android:textColor="#0000CD"
             android:id="@+id/button_CheckLocation"
-            android:background="#82F9B7"/>
+            android:background="#FFFFFF"/>
 
         <Button
             android:layout_width="match_parent"
@@ -116,7 +120,7 @@
             android:text="사진앨범"
             android:textColor="#B9062F"
             android:id="@+id/button_GetImage"
-            android:background="#82F9B7"/>
+            android:background="#FFFFFF"/>
     </LinearLayout>
 
     <LinearLayout
@@ -131,7 +135,7 @@
             android:textSize="20sp"
             android:text="상태저장"
             android:id="@+id/button_SaveLocation"
-            android:background="#56B37F"/>
+            android:background="#6799FF"/>
 
     </LinearLayout>
 
