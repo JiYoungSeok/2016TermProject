@@ -143,7 +143,7 @@ public class TaskActivity extends AppCompatActivity {
                     currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,2) + chronometer.getText().toString().substring(3));
                     currentTimeToSeconds = ((currentTime / 100) * SECONDS_PER_MINUTE) + (currentTime % 100);
                 } else if(chronometer.getText().toString().length() == 7) {
-                    currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,1) + chronometer.getText().toString().substring(2,4) + chronometer.toString().substring(5));
+                    currentTime = Integer.parseInt(chronometer.getText().toString().substring(0,1) + chronometer.getText().toString().substring(2,4) + chronometer.getText().toString().substring(5));
                     currentTimeToSeconds = (((currentTime / 10000)) * SECONDS_PER_HOUR) + ((currentTime % 10000) / 100) * SECONDS_PER_MINUTE + (currentTime % 100);
                 }
 

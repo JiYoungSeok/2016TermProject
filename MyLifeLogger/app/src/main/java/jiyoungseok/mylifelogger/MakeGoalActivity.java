@@ -1,6 +1,8 @@
 package jiyoungseok.mylifelogger;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +12,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +31,7 @@ public class MakeGoalActivity extends AppCompatActivity {
     Button buttonSaveGoal;
     ListView listViewGoal;
     String category;
+    LinearLayout warningWindow;
 
     DBManagerGoal dbManager = new DBManagerGoal(this, "myGoal.db", null, 1);
 
@@ -116,6 +121,45 @@ public class MakeGoalActivity extends AppCompatActivity {
             }
         });
 
+        listViewGoal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                final int deleteStartDate = myGoalList.get((int)id).getStartDate();
+                final int deleteEndDate = myGoalList.get((int)id).getEndDate();
+                final int deleteTime = myGoalList.get((int)id).getTime();
+                final String deleteCategory = myGoalList.get((int)id).getCategory();
+                final String deleteUpOrDown = myGoalList.get((int)id).getUpOrDown();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MakeGoalActivity.this);
+                warningWindow = new LinearLayout(MakeGoalActivity.this);
+                warningWindow.setPadding(0, 0, 0, 0);
+
+                builder
+                        .setTitle("경고")
+                        .setCancelable(false)
+                        .setMessage(
+                                "삭제한 데이터는 복구할 수 없습니다." +
+                                "\n정말 삭제하시겠습니까?")
+                        .setView(warningWindow)
+                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick (DialogInterface dialog, int which) {
+                                dbManager.delete(deleteStartDate, deleteEndDate, deleteTime, deleteCategory, deleteUpOrDown);
+                                Toast.makeText(MakeGoalActivity.this, "삭제 완료", Toast.LENGTH_SHORT).show();
+                                showListView();
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick (DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                builder.create();
+                builder.show();
+            }
+        });
+
     }
 
     public void onClickStartCalendar(View view) {
@@ -157,7 +201,6 @@ public class MakeGoalActivity extends AppCompatActivity {
         dbManager.showList(myGoalList);
         listViewAdapter = new ListViewAdapter(MakeGoalActivity.this, myGoalList, R.layout.goal_row);
         listViewGoal.setAdapter(listViewAdapter);
-
     }
 
     public void onBackPressed() {
