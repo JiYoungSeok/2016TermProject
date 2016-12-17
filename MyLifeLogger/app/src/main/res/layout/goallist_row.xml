@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="1dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="목표날짜"
+            android:gravity="center"
+            android:background="#F0FFF0"/>
+
+        <TextView
+            android:id="@+id/textView_GoalDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="2016년 12월 17일 ~ 2016년 12월 23일"
+            android:gravity="center"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="1dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="항    목"
+            android:gravity="center"
+            android:background="#F0FFF0"/>
+
+        <TextView
+            android:id="@+id/textView_Category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="공부"
+            android:gravity="center"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="1dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="목표시간"
+            android:gravity="center"
+            android:background="#F0FFF0"/>
+
+        <TextView
+            android:id="@+id/textView_GoalTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="25 시간 이상"
+            android:gravity="center"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="1dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="활동시간"
+            android:gravity="center"
+            android:background="#F0FFF0"/>
+
+        <TextView
+            android:id="@+id/textView_DoTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="15시간 20분 10초"
+            android:gravity="center"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="달 성 률"
+            android:gravity="center"
+            android:background="#F0FFF0"/>
+
+        <TextView
+            android:id="@+id/textView_Percentage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="50% 달성"
+            android:gravity="center"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+</LinearLayout>

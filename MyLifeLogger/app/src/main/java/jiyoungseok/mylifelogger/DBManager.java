@@ -55,6 +55,25 @@ public class DBManager  extends SQLiteOpenHelper {
         return todayTotalTime;
     }
 
+    public int getDoTime(int getStartDate, int getEndDate, String getEvent) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT date, time, event FROM database", null);
+
+        int totalTime = 0;
+
+        while (cursor.moveToNext()) {
+            int date = cursor.getInt(cursor.getColumnIndex("date"));
+            String event = cursor.getString(cursor.getColumnIndex("event"));
+            int time = cursor.getInt(cursor.getColumnIndex("time"));
+
+            if ((date >= getStartDate) && (date <= getEndDate) && (event.equals(getEvent))) {
+                totalTime = totalTime + time;
+            }
+        }
+
+        return totalTime;
+    }
+
     public void showMarker (ArrayList<LogList> al) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM database", null);

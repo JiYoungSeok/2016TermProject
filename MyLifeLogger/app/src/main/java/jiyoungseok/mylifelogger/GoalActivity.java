@@ -7,17 +7,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class GoalActivity extends AppCompatActivity {
+
+    ArrayList<GoalList> myGoalList = new ArrayList<>();
+    DBManagerGoal dbManagerGoalList = new DBManagerGoal(this, "myGoal.db", null, 1);
+    GoalListViewAdapter goalListViewAdapter;
+    ListView listViewGoalList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
 
+        listViewGoalList = (ListView) findViewById(R.id.listView_GoalList);
+
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.parseColor("#5D5D5D"));
         }
+
+        showListView();
+    }
+
+    public void showListView () {
+        myGoalList.clear();
+        dbManagerGoalList.showList(myGoalList);
+        goalListViewAdapter = new GoalListViewAdapter(GoalActivity.this, myGoalList, R.layout.goallist_row);
+        listViewGoalList.setAdapter(goalListViewAdapter);
     }
 
     public void onClickChangePage(View view) {
